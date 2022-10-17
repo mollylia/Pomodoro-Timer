@@ -9,7 +9,9 @@ public class PomodoroInterval {
         this.breakInterval = breakInterval;
     }
 
-//    public PomodoroInterval() {}
+//    // EFFECTS: add a given pomodoro interval onto the list of intervals to run
+//    public void addPomodoroInterval(StudyInterval studyInterval, BreakInterval breakInterval) {
+//    }
 
     // EFFECTS: getter
     public StudyInterval getPomoStudyInterval() {
@@ -21,7 +23,5 @@ public class PomodoroInterval {
         return breakInterval;
     }
 
-    // EFFECTS: add a given pomodoro interval onto the list of intervals to run
-    public void add(PomodoroInterval interval) {
-    }
+
 }

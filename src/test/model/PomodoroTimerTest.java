@@ -3,7 +3,9 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
+import java.util.List;
 
 import static model.BreakInterval.DEFAULT_BREAK_TIME;
 import static model.StudyInterval.DEFAULT_STUDY_TIME;
@@ -46,12 +48,22 @@ public class PomodoroTimerTest {
         assertEquals(0, samplePomoTimer.size());
     }
 
+//    @Test
+//    void testAddPomodoroInterval() {
+//        samplePomoTimer.add(samplePomoInterval);
+//        assertEquals(1, samplePomoTimer.size());
+//        assertEquals(samplePomoInterval, samplePomoTimer.get(0));
+//    }
+
     @Test
     void testAddPomodoroInterval() {
-        samplePomoTimer.add(samplePomoInterval);
-        assertEquals(1, samplePomoTimer.size());
-        assertEquals(samplePomoInterval, samplePomoTimer.get(0));
+        PomodoroTimer testPomoTimer = new PomodoroTimer();
+        testPomoTimer.addInterval(sampleStudyInterval, sampleBreakInterval);
+        assertEquals(1, testPomoTimer.size());
+        assertEquals(samplePomoInterval, testPomoTimer.get(0));
     }
+
+
 
     @Test
     void testAddMultiplePomodoroInterval() {

@@ -7,14 +7,15 @@ public class StudyInterval {
     private String intervalName;
     private int studyDuration;
 
-    // EFFECTS: creates a default study interval with a name and duration (in seconds)
+    // EFFECTS: constructs a default study interval with a name and duration (in seconds)
     public StudyInterval() {
         this.intervalName = DEFAULT_STUDY_NAME;
         this.studyDuration = DEFAULT_STUDY_TIME;
     }
 
+    // REQUIRES: duration > 0
     // MODIFIES: this
-    // EFFECTS: lets the user set a specific (study) time interval with a given name
+    // EFFECTS: constructs set a specific (study) time interval with a given name and duration (in seconds)
     public void setStudyInterval(String name, int duration) {
         this.intervalName = name;
         this.studyDuration = duration;

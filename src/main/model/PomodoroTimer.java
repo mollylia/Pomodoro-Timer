@@ -1,27 +1,19 @@
 package model;
 
 import java.util.*;
-import model.PomodoroInterval;
 
-public class PomodoroTimer {
-    private List<PomodoroInterval> pomodoroTimer;
-    private PomodoroInterval pomodoroInterval;
+public class PomodoroTimer extends ArrayList {
+    private List<PomodoroInterval> pomoIntervals;
 
-    // EFFECTS: creates a list of intervals to run
+    // EFFECTS: constructs an empty collection of intervals to run
     public PomodoroTimer() {
-        pomodoroTimer = new ArrayList<PomodoroInterval>();
-//        pomodoroInterval = new PomodoroInterval();
-//
-//        pomodoroTimer.add1(pomodoroInterval);
-//    }
-//
-//    public void add1(PomodoroInterval interval) {
-//    }
-
-//    public void addPomodoroInterval(PomodoroInterval interval) {
-//        pomodoroTimer.add(interval);
+        this.pomoIntervals = new ArrayList<>();
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: adds a new pomodoro interval to the collection of intervals to be run
+    public void addInterval(StudyInterval studyInterval, BreakInterval breakInterval) {
+        this.pomoIntervals.add(new PomodoroInterval(studyInterval, breakInterval));
+    }
 }
 
