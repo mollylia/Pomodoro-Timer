@@ -1,22 +1,18 @@
-package ui;
+package model;
 
 import java.util.TimerTask;
 
-public class PomodoroTimer extends TimerTask {
+public class SimpleTimerDisplay extends TimerTask {
+    private static final int DEFAULT_STUDY_TIME = 1500;         // time in seconds
+    private static final int DEFAULT_BREAK_TIME = 600;          // time in seconds
+    private static final int DEFAULT_INTERVAL_COUNTER = 3;      // number of times to repeat study + break interval
 
-    // CONSTANTS
-    public static final int DEFAULT_STUDY_TIME = 1500;         // time in seconds
-    public static final int DEFAULT_BREAK_TIME = 300;          // time in seconds
-    public static final int DEFAULT_INTERVAL_COUNTER = 3;      // number of times to repeat study + break interval
-
-
-    // FIELDS
     private int runTime;
     private int timeElapsed;
     private int intervalElapsed;
-    private boolean isStudy;
+    private Boolean isStudy;
 
-    public PomodoroTimer() {
+    public SimpleTimerDisplay() {
         runTime = DEFAULT_STUDY_TIME;
         timeElapsed = 0;
         intervalElapsed = 0;
