@@ -6,24 +6,18 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PomodoroIntervalTest {
-    private PomodoroInterval samplePomoInterval;
-    private StudyInterval pomoStudy;
-    private BreakInterval pomoBreak;
+    private PomodoroInterval pomoInterval;
+
 
     @BeforeEach
     public void setup() {
-        pomoStudy = new StudyInterval();
-        pomoStudy.setStudyInterval("lab 4", 120);
-
-        pomoBreak = new BreakInterval();
-        pomoBreak.setBreakInterval("long break", 600);
-
-        samplePomoInterval = new PomodoroInterval(pomoStudy, pomoBreak);
+        pomoInterval = new PomodoroInterval(true, "study: CPSC 210", 3000);
     }
 
     @Test
     public void testPomodoroIntervalConstructor() {
-        assertEquals(pomoStudy, samplePomoInterval.getPomoStudyInterval());
-        assertEquals(pomoBreak, samplePomoInterval.getPomoBreakInterval());
+        assertTrue(pomoInterval.getStatus());
+        assertEquals("study: CPSC 210", pomoInterval.getName());
+        assertEquals(3000, pomoInterval.getDuration());
     }
 }
