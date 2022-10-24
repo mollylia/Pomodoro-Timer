@@ -1,27 +1,5 @@
 package model;
 
-//public class PomodoroInterval {
-//    private StudyInterval studyInterval;
-//    private BreakInterval breakInterval;
-//
-//    // EFFECTS: constructs a pomodoro interval with the given study and break intervals
-//    public PomodoroInterval(StudyInterval studyInterval, BreakInterval breakInterval) {
-//        this.studyInterval = studyInterval;
-//        this.breakInterval = breakInterval;
-//    }
-//
-//    // EFFECTS: getter
-//    public StudyInterval getPomoStudyInterval() {
-//        return studyInterval;
-//    }
-//
-//    // EFFECTS: getter
-//    public BreakInterval getPomoBreakInterval() {
-//        return breakInterval;
-//    }
-//}
-
-
 public class PomodoroInterval {
     private Boolean status;
     private String name;
@@ -46,6 +24,7 @@ public class PomodoroInterval {
         return name;
     }
 
+    // EFFECTS: returns the duration of the interval, getter
     public int getDuration() {
         return duration;
     }

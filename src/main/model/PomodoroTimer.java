@@ -22,17 +22,18 @@ public class PomodoroTimer {
     // REQUIRES: the list of intervals to not be empty
     // MODIFIES: this
     // EFFECTS: returns the next time interval in the list to be run
-
     public PomodoroInterval getNextInterval() {
-        PomodoroInterval nextInterval = pomoIntervals.get(indexCount);
-        indexCount++;
+        PomodoroInterval nextInterval = null;
+        if (indexCount == pomoIntervals.size()) {
+            nextInterval = null;
+        } else {
+            nextInterval = pomoIntervals.get(indexCount);
+            indexCount++;
+        }
         return nextInterval;
     }
 
-    public int length() {
-        return pomoIntervals.size();
-    }
-
+    // EFFECTS: checks if the collection of intervals to be run is empty
     public Boolean isEmpty() {
         if (pomoIntervals.size() == 0) {
             return true;
@@ -40,4 +41,11 @@ public class PomodoroTimer {
             return false;
         }
     }
+
+    // EFFECTS: returns the number of intervals in the collection to be run
+    //          getter
+    public int length() {
+        return pomoIntervals.size();
+    }
+
 }

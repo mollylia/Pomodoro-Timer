@@ -38,8 +38,6 @@ public class PomodoroTimerTest {
         pomoTimer.addInterval(break1);
         pomoTimer.addInterval(study2);
         assertEquals(3, pomoTimer.length());
-
-        // HOW TO CHECK IF IT IS IN THE RIGHT POSITION
     }
 
     @Test
@@ -87,4 +85,18 @@ public class PomodoroTimerTest {
         assertEquals(break1, pomoTimer.getNextInterval());
         assertEquals(study2, pomoTimer.getNextInterval());
     }
+
+    @Test
+    public void testGetNextIntervalsNoMore() {
+        PomodoroInterval study1 = new PomodoroInterval(true, "study: CPSC 210", 3000);
+        PomodoroInterval break1 = new PomodoroInterval(false, "break", 600);
+
+        pomoTimer.addInterval(study1);
+        pomoTimer.addInterval(break1);
+
+        assertEquals(study1, pomoTimer.getNextInterval());
+        assertEquals(break1, pomoTimer.getNextInterval());
+        assertEquals(null, pomoTimer.getNextInterval());
+    }
 }
+
