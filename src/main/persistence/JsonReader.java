@@ -39,28 +39,28 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses Pomodoro timer from JSON object and returns it
     private PomodoroTimer parsePomodoroTimer(JSONObject jsonObject) {
-        String name = jsonObject.getString("name");
+//        String name = jsonObject.getString("timer");
         PomodoroTimer pomoTimer = new PomodoroTimer();
-        addThingies(pomoTimer, jsonObject);
+        addIntervals(pomoTimer, jsonObject);
         return pomoTimer;
     }
 
     // MODIFIES: pomoTimer
     // EFFECTS: parses intervals from JSON object and adds them to the timer
-    private void addThingies(PomodoroTimer pomoTimer, JSONObject jsonObject) {
-        JSONArray jsonArray = jsonObject.getJSONArray("intervals");
+    private void addIntervals(PomodoroTimer pomoTimer, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("pomoIntervals");
         for (Object json : jsonArray) {
             JSONObject nextInterval = (JSONObject) json;
-            addThingy(pomoTimer, nextInterval);
+            addInterval(pomoTimer, nextInterval);
         }
     }
 
     // MODIFIES: pomoTimer
     // EFFECTS: parses intervals from JSON object and adds it to the timer
-    private void addThingy(PomodoroTimer pomoTimer, JSONObject jsonObject) {
-        Boolean status = Boolean.valueOf(jsonObject.getString("status"));
+    private void addInterval(PomodoroTimer pomoTimer, JSONObject jsonObject) {
+        Boolean status = jsonObject.getBoolean("status");
         String name = jsonObject.getString("name");
         int duration = jsonObject.getInt("duration");
         PomodoroInterval pomoInterval = new PomodoroInterval(status,name,duration);

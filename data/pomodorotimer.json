@@ -1,0 +1,15 @@
+{
+    "name": "Default Pomodoro Timer",
+    "pomoIntervals": [
+        {
+            "duration": 300,
+            "name": "b",
+            "status": false
+        },
+        {
+            "duration": 1500,
+            "name": "s",
+            "status": true
+        }
+    ]
+}

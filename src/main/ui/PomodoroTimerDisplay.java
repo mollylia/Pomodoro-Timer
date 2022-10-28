@@ -18,27 +18,29 @@ public class PomodoroTimerDisplay extends TimerTask {
     private PomodoroTimer pomoTimer;
 
     // EFFECTS: initializes the time and intervals passed to 0
-    public PomodoroTimerDisplay() {
+    public PomodoroTimerDisplay(PomodoroTimer pomoTimer) {
         timeElapsed = 0;
         intervalElapsed = 0;
 
-        initializeInterval();
+        //initializeInterval();
+        this.pomoTimer = pomoTimer;
+        totalIntervalCounter = pomoTimer.length();
         getNextInterval();
     }
 
     // EFFECTS: initializes the time
-    public void initializeInterval() {
-        PomodoroInterval study1 = new PomodoroInterval(true, "study: CPSC 210", 5);
-        PomodoroInterval break1 = new PomodoroInterval(false, "break", 3);
-        PomodoroInterval study2 = new PomodoroInterval(true, "study: CPSC 210 lab", 5);
-
-        pomoTimer = new PomodoroTimer();
-        pomoTimer.addInterval(study1);
-        pomoTimer.addInterval(break1);
-        pomoTimer.addInterval(study2);
-
-        totalIntervalCounter = pomoTimer.length();
-    }
+//    public void initializeInterval() {
+//        PomodoroInterval study1 = new PomodoroInterval(true, "study: CPSC 210", 5);
+//        PomodoroInterval break1 = new PomodoroInterval(false, "break", 3);
+//        PomodoroInterval study2 = new PomodoroInterval(true, "study: CPSC 210 lab", 5);
+//
+//        pomoTimer = new PomodoroTimer();
+//        pomoTimer.addInterval(study1);
+//        pomoTimer.addInterval(break1);
+//        pomoTimer.addInterval(study2);
+//
+//        totalIntervalCounter = pomoTimer.length();
+//    }
 
     // EFFECTS: gets the time and status of the next interval
     public void getNextInterval() {

@@ -8,6 +8,7 @@ import java.util.*;
 
 // Represents the list of Pomodoro intervals to run
 public class PomodoroTimer implements Writable {
+    private String name;
     private ArrayList<PomodoroInterval> pomoIntervals;
     private int indexCount;
 
@@ -15,6 +16,16 @@ public class PomodoroTimer implements Writable {
     public PomodoroTimer() {
         pomoIntervals = new ArrayList<>();
         indexCount = 0;
+    }
+
+    public PomodoroTimer(String name) {
+        this.name = name;
+        pomoIntervals = new ArrayList<>();
+        indexCount = 0;
+    }
+
+    public String getName() {
+        return name;
     }
 
     // MODIFIES: this
@@ -55,6 +66,7 @@ public class PomodoroTimer implements Writable {
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
+        json.put("name", name);
         json.put("pomoIntervals", pomoIntervalsToJson());
         return json;
     }
@@ -69,5 +81,4 @@ public class PomodoroTimer implements Writable {
 
         return jsonArray;
     }
-
 }

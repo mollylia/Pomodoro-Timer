@@ -26,8 +26,8 @@ public class JsonWriter {
 
     // MODIFIES: this
     // EFFECTS: writes JSON representation of workroom to file
-    public void write(PomodoroTimer wr) {
-        JSONObject json = wr.toJson();
+    public void write(PomodoroTimer pomoTimer) {
+        JSONObject json = pomoTimer.toJson();
         saveToFile(json.toString(TAB));
     }
 
