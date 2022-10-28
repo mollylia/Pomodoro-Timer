@@ -23,7 +23,7 @@ public class PomodoroTimerApp {
     // EFFECTS: constructs Pomodoro timer and runs application
     public PomodoroTimerApp() {
         input = new Scanner(System.in);
-        pomoTimer = new PomodoroTimer("Default Pomodoro Timer");
+        pomoTimer = new PomodoroTimer("My Pomodoro Timer");
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
         runPomodoroApp();

@@ -2,11 +2,17 @@ package persistence;
 
 
 
+import model.PomodoroInterval;
+import model.PomodoroStatus;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JsonTest {
-//    protected void checkThingy(String name, Category category, Thingy thingy) {
-//        assertEquals(name, thingy.getName());
-//        assertEquals(category, thingy.getCategory());
-//    }
+    protected void checkPomoInterval(PomodoroInterval pomoInterval, Boolean status, String name, int duration) {
+
+        assertEquals(name, pomoInterval.getName());
+        assertEquals(status, pomoInterval.getStatus());
+        assertEquals(name, pomoInterval.getName());
+        assertEquals(duration, pomoInterval.getDuration());
+    }
 }

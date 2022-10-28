@@ -41,8 +41,8 @@ public class JsonReader {
 
     // EFFECTS: parses Pomodoro timer from JSON object and returns it
     private PomodoroTimer parsePomodoroTimer(JSONObject jsonObject) {
-//        String name = jsonObject.getString("timer");
-        PomodoroTimer pomoTimer = new PomodoroTimer();
+        String name = jsonObject.getString("name");
+        PomodoroTimer pomoTimer = new PomodoroTimer("My Pomodoro Timer");
         addIntervals(pomoTimer, jsonObject);
         return pomoTimer;
     }

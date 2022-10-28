@@ -1,5 +1,6 @@
 package persistence;
 
+import model.PomodoroInterval;
 import model.PomodoroTimer;
 import org.junit.jupiter.api.Test;
 
@@ -33,18 +34,18 @@ class JsonReaderTest extends JsonTest {
         }
     }
 
-//    @Test
-//    void testReaderGeneralWorkRoom() {
-//        JsonReader reader = new JsonReader("./data/testReaderGeneralPomodoroTimer.json");
-//        try {
-//            PomodoroTimer wr = reader.read();
-//            assertEquals("My work room", wr.getName());
-//            List<Thingy> thingies = wr.getThingies();
-//            assertEquals(2, thingies.size());
-//            checkThingy("needle", Category.STITCHING, thingies.get(0));
-//            checkThingy("saw", Category.WOODWORK, thingies.get(1));
-//        } catch (IOException e) {
-//            fail("Couldn't read from file");
-//        }
-//    }
+    @Test
+    void testReaderGeneralWorkRoom() {
+        JsonReader reader = new JsonReader("./data/testReaderGeneralPomodoroTimer.json");
+        try {
+            PomodoroTimer pomoTimer = reader.read();
+            assertEquals("My Pomodoro Timer", pomoTimer.getName());
+            List<PomodoroInterval> pomoIntervals = pomoTimer.getPomoIntervals();
+            assertEquals(2, pomoIntervals.size());
+            checkPomoInterval(pomoIntervals.get(0), false, "b", 300);
+            checkPomoInterval(pomoIntervals.get(1),true,"s",1500);
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+    }
 }

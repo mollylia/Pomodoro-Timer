@@ -9,7 +9,7 @@ import java.util.*;
 // Represents the list of Pomodoro intervals to run
 public class PomodoroTimer implements Writable {
     private String name;
-    private ArrayList<PomodoroInterval> pomoIntervals;
+    private List<PomodoroInterval> pomoIntervals;
     private int indexCount;
 
     // EFFECTS: constructs an empty collection of intervals to run
@@ -61,6 +61,12 @@ public class PomodoroTimer implements Writable {
     // EFFECTS: returns the number of intervals in the collection to be run, getter
     public int length() {
         return pomoIntervals.size();
+    }
+
+
+    // EFFECTS:
+    public List<PomodoroInterval> getPomoIntervals() {
+        return Collections.unmodifiableList(pomoIntervals);
     }
 
     @Override

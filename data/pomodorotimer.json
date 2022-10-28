@@ -1,5 +1,5 @@
 {
-    "name": "Default Pomodoro Timer",
+    "name": "My Pomodoro Timer",
     "pomoIntervals": [
         {
             "duration": 300,
