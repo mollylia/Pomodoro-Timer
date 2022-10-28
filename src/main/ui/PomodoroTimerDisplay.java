@@ -1,12 +1,11 @@
 package ui;
 
-
 import model.PomodoroInterval;
 import model.PomodoroTimer;
 
 import java.util.TimerTask;
 
-
+// Displays the running time of the current Pomodoro interval
 public class PomodoroTimerDisplay extends TimerTask {
     private static final int DEFAULT_STUDY_TIME = 5;         // time in seconds
     private static final int DEFAULT_BREAK_TIME = 3;         // time in seconds

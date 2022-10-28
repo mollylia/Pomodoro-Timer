@@ -13,12 +13,12 @@ notifies me once an interval has ended. The Pomodoro timers I tried do not have 
 breaks, and manually changing or starting the timer becomes annoying.
 
 
-### User stories for the Pomodoro timer:
-
-- As a user, I want to be able to set times of different time intervals for studying and breaks, and have them
-automatically start once the preceding one has ended.
-- As a user, I want to be able to add a study session onto a list of other sessions so I get many sessions that can vary
-in their duration.
+### User stories:
+- As a user, I want to be able to add different time intervals onto a list of intervals I want to run.
+- As a user, I want to be able have the next time interval start automatically once the preceding one has ended.
 - As a user, I want to be able to see the remaining time on the current time interval.
 - As a user, I want to be notified when an interval has ended.
 
+- As a user, when I select the quit option from the application menu, I want to be reminded to save the state of the
+timer to file and have the option to do so or not.
+- As a user, when I start the application, I want to be given the option to load my pomodoro timer from file.

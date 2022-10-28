@@ -1,9 +1,15 @@
 package model;
 
-public class PomodoroInterval {
-    private Boolean status;
-    private String name;
-    private int duration;
+import org.json.JSONObject;
+import persistence.Writable;
+
+import java.nio.file.Watchable;
+
+// Represents an interval with a status, name, and duration
+public class PomodoroInterval implements Writable {
+    private Boolean status;          // the type of the interval: study (true) or break (false)
+    private String name;             // the name of the interval reminding the user of the task to work on
+    private int duration;            // the duration of the time interval in seconds
 
     // REQUIRES: duration >= 0
     // EFFECTS: constructs a pomodoro interval with the given name, time interval, and status.
@@ -12,6 +18,21 @@ public class PomodoroInterval {
         this.status = status;
         this.name = name;
         this.duration = duration;
+    }
+
+    // EFFECTS: sets the status of the interval, setter
+    public void setStatus(Boolean newStatus) {
+        this.status = newStatus;
+    }
+
+    // EFFECTS: sets the name of the interval, setter
+    public void setName(String newName) {
+        this.name = newName;
+    }
+
+    // EFFECTS: sets the duration of the interval, setter
+    public void setDuration(int newDuration) {
+        this.duration = newDuration;
     }
 
     // EFFECTS: returns the status of the interval, getter
@@ -27,5 +48,14 @@ public class PomodoroInterval {
     // EFFECTS: returns the duration of the interval, getter
     public int getDuration() {
         return duration;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("status", status);
+        json.put("name", name);
+        json.put("duration", duration);
+        return json;
     }
 }

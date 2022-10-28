@@ -1,8 +1,13 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.*;
 
-public class PomodoroTimer {
+// Represents the list of Pomodoro intervals to run
+public class PomodoroTimer implements Writable {
     private ArrayList<PomodoroInterval> pomoIntervals;
     private int indexCount;
 
@@ -42,10 +47,27 @@ public class PomodoroTimer {
         }
     }
 
-    // EFFECTS: returns the number of intervals in the collection to be run
-    //          getter
+    // EFFECTS: returns the number of intervals in the collection to be run, getter
     public int length() {
         return pomoIntervals.size();
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("pomoIntervals", pomoIntervalsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns things in this workroom as a JSON array
+    private JSONArray pomoIntervalsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (PomodoroInterval pomoInterval : pomoIntervals) {
+            jsonArray.put(pomoInterval.toJson());
+        }
+
+        return jsonArray;
     }
 
 }
