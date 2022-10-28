@@ -1,5 +1,7 @@
 package model;
 
+// A set of default options for Pomodoro intervals
 public enum PomodoroStatus {
-    SHORTBREAK, LONGBREAK, SHORTSTUDY, LONGSTUDY;
+    SHORT_BREAK, LONG_BREAK, SHORT_STUDY, LONG_STUDY;
 }
+

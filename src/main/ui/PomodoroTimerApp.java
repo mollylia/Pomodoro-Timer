@@ -92,13 +92,13 @@ public class PomodoroTimerApp {
 
         String setName = name;
 
-        if (pomoStatus == PomodoroStatus.SHORTBREAK) {
+        if (pomoStatus == PomodoroStatus.SHORT_BREAK) {
             setDuration = 300;
             setStatus = false;
-        } else if (pomoStatus == PomodoroStatus.LONGBREAK) {
+        } else if (pomoStatus == PomodoroStatus.LONG_BREAK) {
             setDuration = 600;
             setStatus = false;
-        } else if (pomoStatus == PomodoroStatus.SHORTSTUDY) {
+        } else if (pomoStatus == PomodoroStatus.SHORT_STUDY) {
             setDuration = 1500;
             setStatus = true;
         } else {
@@ -167,7 +167,7 @@ public class PomodoroTimerApp {
     private void loadPomodoroTimer() {
         try {
             pomoTimer = jsonReader.read();
-            System.out.println("Loaded last saved Pomodoro timer from " + JSON_STORE);
+            System.out.println("Loaded " + pomoTimer.getName() + "from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }

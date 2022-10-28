@@ -1,9 +1,6 @@
 package persistence;
 
-
-
 import model.PomodoroInterval;
-import model.PomodoroStatus;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
