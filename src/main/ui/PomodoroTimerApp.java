@@ -12,9 +12,16 @@ import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 
-// Pomodoro timer application
+// Based on WorkRoomApp in:
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+// Represents the Pomodoro timer application
 public class PomodoroTimerApp {
     private static final String JSON_STORE = "./data/pomodorotimer.json";
+    private static final int SHORT_BREAK = 300;
+    private static final int LONG_BREAK = 600;
+    private static final int SHORT_STUDY = 1500;
+    private static final int LONG_STUDY = 3000;
+
     private Scanner input;
     private PomodoroTimer pomoTimer;
     private JsonWriter jsonWriter;
@@ -29,7 +36,6 @@ public class PomodoroTimerApp {
         runPomodoroApp();
     }
 
-    // MODIFIES: this
     // EFFECTS: processes user input
     public void runPomodoroApp() {
         Boolean keepGoing = true;
@@ -50,8 +56,6 @@ public class PomodoroTimerApp {
                 processDisplayCommand(command);
             }
         }
-
-//        System.out.println("\nGoodbye!");
     }
 
     // EFFECTS: displays menu of options to user
@@ -81,7 +85,7 @@ public class PomodoroTimerApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: prompt user for status, name, and duration of the interval and adds it to PomodoroTimer
+    // EFFECTS: prompt user for a category interval with a name and adds it to PomodoroTimer
     private void addInterval() {
         Boolean setStatus;
         int setDuration;
@@ -93,16 +97,16 @@ public class PomodoroTimerApp {
         String setName = name;
 
         if (pomoStatus == PomodoroStatus.SHORT_BREAK) {
-            setDuration = 300;
+            setDuration = SHORT_BREAK;
             setStatus = false;
         } else if (pomoStatus == PomodoroStatus.LONG_BREAK) {
-            setDuration = 600;
+            setDuration = LONG_BREAK;
             setStatus = false;
         } else if (pomoStatus == PomodoroStatus.SHORT_STUDY) {
-            setDuration = 1500;
+            setDuration = SHORT_STUDY;
             setStatus = true;
         } else {
-            setDuration = 3000;
+            setDuration = LONG_STUDY;
             setStatus = true;
         }
 
@@ -110,7 +114,7 @@ public class PomodoroTimerApp {
         pomoTimer.addInterval(newInterval);
     }
 
-    // EFFECTS: prompts user to select category and returns it
+    // EFFECTS: prompts user to select a type of interval and returns it
     private PomodoroStatus readPomodoroStatus() {
         System.out.println("Please select a status for your interval");
 
@@ -127,12 +131,16 @@ public class PomodoroTimerApp {
     // EFFECTS: runs the list of intervals in the Pomodoro timer.
     //          if the list is empty, return an error message
     private void runPomodoroTimer() {
-        Timer timer = new Timer();
-        TimerTask timerInterval = new ui.PomodoroTimerDisplay(pomoTimer);
-        timer.schedule(timerInterval, 0, 1000);
+        if (pomoTimer.length() == 0) {
+            System.out.println("There are no intervals to run...");
+        } else {
+            Timer timer = new Timer();
+            TimerTask timerInterval = new ui.PomodoroTimerDisplay(pomoTimer);
+            timer.schedule(timerInterval, 0, 1000);
+        }
     }
 
-    //
+    // EFFECTS: saves Pomodoro timer to file
     private void savePomodoroTimer() {
         try {
             jsonWriter.open();
@@ -144,7 +152,6 @@ public class PomodoroTimerApp {
         }
     }
 
-
     // EFFECTS: gives the user an option to save the current state of the Pomodoro timer
     private void toSave() {
         System.out.println("Would you like to save?");
@@ -152,6 +159,8 @@ public class PomodoroTimerApp {
         System.out.println("\tn -> no");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user command
     private void toSaveCommand(String command) {
         if (command.equals("y")) {
             savePomodoroTimer();
@@ -162,18 +171,17 @@ public class PomodoroTimerApp {
         }
     }
 
-    // MODIFIES: pomoTimer
-    // EFFECTS: parses Pomodoro intervals from JSON object and adds it to Pomodoro timer
+    // MODIFIES: this
+    // EFFECTS: loads Pomodoro timer from file
     private void loadPomodoroTimer() {
         try {
             pomoTimer = jsonReader.read();
-            System.out.println("Loaded " + pomoTimer.getName() + "from " + JSON_STORE);
+            System.out.println("Loaded " + pomoTimer.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }
-
 
 
 //    // EFFECTS: sets the status for the Pomodoro interval

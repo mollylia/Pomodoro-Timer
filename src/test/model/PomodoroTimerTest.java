@@ -19,13 +19,17 @@ public class PomodoroTimerTest {
     }
 
     @Test
+    public void testPomodoroTimerConstructorWithName() {
+        PomodoroTimer pomoTimerWithName = new PomodoroTimer("My Pomodoro Timer");
+        assertEquals("My Pomodoro Timer", pomoTimerWithName.getName());
+    }
+
+    @Test
     public void testAddOneInterval() {
         PomodoroInterval study1 = new PomodoroInterval(true, "study: CPSC 210", 3000);
 
         pomoTimer.addInterval(study1);
         assertEquals(1, pomoTimer.length());
-
-        // HOW TO CHECK IF IT IS IN THE RIGHT POSITION
     }
 
     @Test

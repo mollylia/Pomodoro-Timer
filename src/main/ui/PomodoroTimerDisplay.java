@@ -28,20 +28,6 @@ public class PomodoroTimerDisplay extends TimerTask {
         getNextInterval();
     }
 
-    // EFFECTS: initializes the time
-//    public void initializeInterval() {
-//        PomodoroInterval study1 = new PomodoroInterval(true, "study: CPSC 210", 5);
-//        PomodoroInterval break1 = new PomodoroInterval(false, "break", 3);
-//        PomodoroInterval study2 = new PomodoroInterval(true, "study: CPSC 210 lab", 5);
-//
-//        pomoTimer = new PomodoroTimer();
-//        pomoTimer.addInterval(study1);
-//        pomoTimer.addInterval(break1);
-//        pomoTimer.addInterval(study2);
-//
-//        totalIntervalCounter = pomoTimer.length();
-//    }
-
     // EFFECTS: gets the time and status of the next interval
     public void getNextInterval() {
         PomodoroInterval nextInterval = pomoTimer.getNextInterval();
@@ -52,7 +38,7 @@ public class PomodoroTimerDisplay extends TimerTask {
         }
     }
 
-
+    // EFFECTS: currently runs the timer with default times
     @Override
     public void run() {
         if ((timeElapsed < runTime) && (intervalElapsed < totalIntervalCounter)) {
@@ -74,6 +60,7 @@ public class PomodoroTimerDisplay extends TimerTask {
         }
     }
 
+    // EFFECTS: runs the timer and notifies the user of the end of a break
     public void breakTime() {
         if (timeElapsed == DEFAULT_BREAK_TIME) {
             timeElapsed = 0;
@@ -83,6 +70,7 @@ public class PomodoroTimerDisplay extends TimerTask {
         }
     }
 
+    // EFFECTS: runs the timer and notifies the user of the start of a break
     public void studyTime() {
         if (timeElapsed == DEFAULT_STUDY_TIME) {
             timeElapsed = 0;
@@ -92,3 +80,18 @@ public class PomodoroTimerDisplay extends TimerTask {
         }
     }
 }
+
+
+//    // EFFECTS: initializes the time
+//    public void initializeInterval() {
+//        PomodoroInterval study1 = new PomodoroInterval(true, "study: CPSC 210", 5);
+//        PomodoroInterval break1 = new PomodoroInterval(false, "break", 3);
+//        PomodoroInterval study2 = new PomodoroInterval(true, "study: CPSC 210 lab", 5);
+//
+//        pomoTimer = new PomodoroTimer();
+//        pomoTimer.addInterval(study1);
+//        pomoTimer.addInterval(break1);
+//        pomoTimer.addInterval(study2);
+//
+//        totalIntervalCounter = pomoTimer.length();
+//    }

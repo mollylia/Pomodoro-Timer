@@ -50,6 +50,9 @@ public class PomodoroInterval implements Writable {
         return duration;
     }
 
+
+    // Method was based on Thingy.toJson() in:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

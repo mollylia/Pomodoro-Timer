@@ -11,9 +11,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class JsonWriterTest extends JsonTest {
-    //NOTE TO CPSC 210 STUDENTS: the strategy in designing tests for the JsonWriter is to
-    //write data to a file and then use the reader to read it back in and check that we
-    //read in a copy of what was written out.
 
     @Test
     void testWriterInvalidFile() {
@@ -49,8 +46,8 @@ class JsonWriterTest extends JsonTest {
     void testWriterGeneralWorkroom() {
         try {
             PomodoroTimer pomoTimer = new PomodoroTimer("My work room");
-            pomoTimer.addInterval(new PomodoroInterval(false, "b", 300));
-            pomoTimer.addInterval(new PomodoroInterval(true, "s", 1500));
+            pomoTimer.addInterval(new PomodoroInterval(true, "lab", 3000));
+            pomoTimer.addInterval(new PomodoroInterval(false, "nap", 600));
 
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralPomodoroTimer.json");
             writer.open();
@@ -62,8 +59,8 @@ class JsonWriterTest extends JsonTest {
             assertEquals("My Pomodoro Timer", pomoTimer.getName());
             List<PomodoroInterval> thingies = pomoTimer.getPomoIntervals();
             assertEquals(2, thingies.size());
-            checkPomoInterval(thingies.get(0), false, "b", 300);
-            checkPomoInterval(thingies.get(1), true,"s", 1500);
+            checkPomoInterval(thingies.get(0), true, "lab", 3000);
+            checkPomoInterval(thingies.get(1), false,"nap", 600);
 
         } catch (IOException e) {
             fail("Exception should not have been thrown");

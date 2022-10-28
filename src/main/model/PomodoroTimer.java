@@ -18,12 +18,14 @@ public class PomodoroTimer implements Writable {
         indexCount = 0;
     }
 
+    // EFFECTS: constructs an empty collection of intervals with a name
     public PomodoroTimer(String name) {
         this.name = name;
         pomoIntervals = new ArrayList<>();
         indexCount = 0;
     }
 
+    // EFFECTS: returns the name of the Pomodoro timer, getter
     public String getName() {
         return name;
     }
@@ -33,7 +35,6 @@ public class PomodoroTimer implements Writable {
     public void addInterval(PomodoroInterval interval) {
         pomoIntervals.add(interval);
     }
-
 
     // REQUIRES: the list of intervals to not be empty
     // MODIFIES: this
@@ -63,12 +64,16 @@ public class PomodoroTimer implements Writable {
         return pomoIntervals.size();
     }
 
-
-    // EFFECTS:
+    // Method was based on WorkRoom.getThingies() in:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+    // EFFECTS: returns an unmodified list of Pomodoro intervals in the Pomodoro timer
     public List<PomodoroInterval> getPomoIntervals() {
         return Collections.unmodifiableList(pomoIntervals);
     }
 
+
+    // Method was based on WorkRoom.toJson() in:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -77,14 +82,16 @@ public class PomodoroTimer implements Writable {
         return json;
     }
 
-    // EFFECTS: returns things in this workroom as a JSON array
+    // Method was based on WorkRoom.thingiesToJson() in:
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+    // EFFECTS: returns the intervals in the timer as a JSON array
     private JSONArray pomoIntervalsToJson() {
         JSONArray jsonArray = new JSONArray();
 
         for (PomodoroInterval pomoInterval : pomoIntervals) {
             jsonArray.put(pomoInterval.toJson());
         }
-
         return jsonArray;
     }
 }
+

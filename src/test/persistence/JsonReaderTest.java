@@ -42,8 +42,8 @@ class JsonReaderTest extends JsonTest {
             assertEquals("My Pomodoro Timer", pomoTimer.getName());
             List<PomodoroInterval> pomoIntervals = pomoTimer.getPomoIntervals();
             assertEquals(2, pomoIntervals.size());
-            checkPomoInterval(pomoIntervals.get(0), false, "b", 300);
-            checkPomoInterval(pomoIntervals.get(1),true,"s",1500);
+            checkPomoInterval(pomoIntervals.get(0), true, "lab", 3000);
+            checkPomoInterval(pomoIntervals.get(1), false, "nap", 600);
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
