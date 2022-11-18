@@ -8,9 +8,7 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 // Based on WorkRoomApp in:
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
@@ -114,8 +112,8 @@ public class PomodoroTimerApp {
         System.out.println("Please select a status for your interval");
 
         int menuLabel = 1;
-        for (PomodoroDefault pomoStatus : PomodoroDefault.values()) {
-            System.out.println(menuLabel + ": " + pomoStatus);
+        for (PomodoroDefault pomoDefault : PomodoroDefault.values()) {
+            System.out.println(menuLabel + ": " + pomoDefault);
             menuLabel++;
         }
 
@@ -178,4 +176,16 @@ public class PomodoroTimerApp {
 
         return pomoTimer;
     }
+
+    // EFFECTS: prints all the intervals in timer to the console
+    public void printIntervals() {
+        List<PomodoroInterval> intervals = pomoTimer.getPomoIntervals();
+//        List<String> intervalList = new ArrayList<>();
+
+        for (PomodoroInterval interval : intervals) {
+            System.out.println(interval);
+        }
+    }
+
+
 }

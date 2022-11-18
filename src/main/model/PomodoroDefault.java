@@ -9,18 +9,18 @@ public enum PomodoroDefault {
     public static int getPomodoroDefault(PomodoroDefault defaultTime) {
         switch (defaultTime) {
             case SHORT_STUDY:
-//              return 1500;
-                return 5;
+                return 1500;
+//                return 5;
 
             case LONG_STUDY:
-//              return 3000;
-                return 8;
+                return 3000;
+//                return 8;
 
             case SHORT_BREAK:
-//              return 300;
-                return 3;
+                return 300;
+//                return 3;
         }
-//      return 600;
-        return 4;
+        return 600;
+//        return 4;
     }
 }
