@@ -1,5 +1,6 @@
 package ui;
 
+import model.PomodoroDefault;
 import model.PomodoroInterval;
 import model.PomodoroTimer;
 
@@ -7,9 +8,6 @@ import java.util.TimerTask;
 
 // Displays the running time of the current Pomodoro interval
 public class PomodoroTimerDisplay extends TimerTask {
-    private static final int DEFAULT_STUDY_TIME = 5;         // time in seconds
-    private static final int DEFAULT_BREAK_TIME = 3;         // time in seconds
-
     private int runTime;
     private int timeElapsed;
     private int intervalElapsed;
@@ -22,7 +20,6 @@ public class PomodoroTimerDisplay extends TimerTask {
         timeElapsed = 0;
         intervalElapsed = 0;
 
-        //initializeInterval();
         this.pomoTimer = pomoTimer;
         totalIntervalCounter = pomoTimer.length();
         getNextInterval();
@@ -38,7 +35,7 @@ public class PomodoroTimerDisplay extends TimerTask {
         }
     }
 
-    // EFFECTS: currently runs the timer with default times
+    // EFFECTS: runs the timer with the set intervals
     @Override
     public void run() {
         if ((timeElapsed < runTime) && (intervalElapsed < totalIntervalCounter)) {
@@ -46,23 +43,23 @@ public class PomodoroTimerDisplay extends TimerTask {
             long second = (durationInSeconds) % 60;
             long minute = (durationInSeconds / (60)) % 60;
             timeElapsed += 1;
-
             System.out.println(minute + ":" + second);
 
             if (!(isStudy)) {
-                breakTime();
+                breakTime(runTime);
             } else {
-                studyTime();
+                studyTime(runTime);
             }
+
         } else {
             System.out.println("Session complete!");
             System.exit(0);
         }
     }
 
-    // EFFECTS: runs the timer and notifies the user of the end of a break
-    public void breakTime() {
-        if (timeElapsed == DEFAULT_BREAK_TIME) {
+    // EFFECTS: checks to see if break interval has ended, if so notify the user
+    public void breakTime(int breakTime) {
+        if (timeElapsed == breakTime) {
             timeElapsed = 0;
             intervalElapsed += 1;
             getNextInterval();
@@ -70,9 +67,9 @@ public class PomodoroTimerDisplay extends TimerTask {
         }
     }
 
-    // EFFECTS: runs the timer and notifies the user of the start of a break
-    public void studyTime() {
-        if (timeElapsed == DEFAULT_STUDY_TIME) {
+    // EFFECTS: checks to see if study interval has ended, if so notify the user
+    public void studyTime(int studyTime) {
+        if (timeElapsed == studyTime) {
             timeElapsed = 0;
             intervalElapsed += 1;
             getNextInterval();
@@ -80,6 +77,28 @@ public class PomodoroTimerDisplay extends TimerTask {
         }
     }
 }
+
+
+// EFFECTS: runs the timer and notifies the user of the end of a break
+//    public void breakTime(int time) {
+//        if (timeElapsed == time) {
+//            timeElapsed = 0;
+//            intervalElapsed += 1;
+//            getNextInterval();
+//            System.out.println("Break time is over!");
+//        }
+//    }
+
+
+// EFFECTS: runs the timer and notifies the user of the start of a break
+//        public void studyTime (int time){
+//            if (timeElapsed == time) {
+//                timeElapsed = 0;
+//                intervalElapsed += 1;
+//                getNextInterval();
+//                System.out.println("Time for a break!");
+//            }
+//        }
 
 
 //    // EFFECTS: initializes the time
@@ -95,3 +114,14 @@ public class PomodoroTimerDisplay extends TimerTask {
 //
 //        totalIntervalCounter = pomoTimer.length();
 //    }
+
+
+//if (interval.getDuration() == PomodoroDefault.getPomodoroDefault(PomodoroDefault.SHORT_STUDY)) {
+//        studyTime(PomodoroDefault.SHORT_STUDY);
+//        } else if (interval.getDuration() == PomodoroDefault.getPomodoroDefault(PomodoroDefault.LONG_STUDY)) {
+//        studyTime(PomodoroDefault.LONG_STUDY);
+//        } else if (interval.getDuration() == PomodoroDefault.getPomodoroDefault(PomodoroDefault.SHORT_BREAK)) {
+//        breakTime(PomodoroDefault.SHORT_BREAK);
+//        } else if (interval.getDuration() == PomodoroDefault.getPomodoroDefault(PomodoroDefault.LONG_BREAK)) {
+//        breakTime(PomodoroDefault.LONG_BREAK);
+//        }
