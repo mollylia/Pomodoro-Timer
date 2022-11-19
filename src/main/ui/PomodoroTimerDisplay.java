@@ -32,10 +32,19 @@ public class PomodoroTimerDisplay extends TimerTask {
         if (nextInterval != null) {
             runTime = nextInterval.getDuration();
             isStudy = nextInterval.getStatus();
-        } else {
-            initializeInterval();
         }
     }
+
+//    public void getNextInterval() {
+//        PomodoroInterval nextInterval = pomoTimer.getNextInterval();
+//
+//        if (nextInterval != null) {
+//            runTime = nextInterval.getDuration();
+//            isStudy = nextInterval.getStatus();
+//        } else {
+//            initializeInterval();
+//        }
+//    }
 
     // EFFECTS: initializes the time
     public void initializeInterval() {
