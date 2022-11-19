@@ -204,19 +204,19 @@ public class PomodoroTimerApp {
         return toBePrinted;
     }
 
-//    public String savePomodoroTimerToString() {
-//        String output = "";
-//        try {
-//            pomoTimer = new PomodoroTimer("My Pomodoro Timer");
-//            loadPomodoroTimer();
-//            jsonWriter.open();
-//            output = jsonWriter.writeToString(pomoTimer);
-//            jsonWriter.close();
-////                System.out.println("Saved " + pomoTimer.getName() + " to " + JSON_STORE);
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Unable to write to file: " + JSON_STORE);
-//        }
-//        return output;
-//    }
+    public String savePomodoroTimerToString() {
+        String output = "";
+        try {
+            pomoTimer = new PomodoroTimer("My Pomodoro Timer");
+            loadPomodoroTimer();
+            jsonWriter.open();
+            output = jsonWriter.writeToString(pomoTimer);
+            jsonWriter.close();
+//                System.out.println("Saved " + pomoTimer.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+        return output;
+    }
 
 }

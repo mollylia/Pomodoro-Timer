@@ -266,19 +266,17 @@ public class PomodoroTimerGUI extends JFrame {
             setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             setVisible(true);
 
-            PomodoroTimerApp app = new PomodoroTimerApp();
-
-
+//            PomodoroTimerApp app = new PomodoroTimerApp();
 //            JTextArea textArea = new JTextArea(app.printIntervals(), 50,50);
 //            panel.add(textArea);
 //            add(panel, BorderLayout.CENTER);
 
-//            PomodoroTimerApp app = new PomodoroTimerApp();
-//            String output = app.savePomodoroTimerToString();
-//
-//            JTextArea textArea = new JTextArea(output, 50, 50);
-//            panel.add(textArea);
-//            add(panel, BorderLayout.CENTER);
+            PomodoroTimerApp app = new PomodoroTimerApp();
+            String output = app.savePomodoroTimerToString();
+
+            JTextArea textArea = new JTextArea(output, 50, 50);
+            panel.add(textArea);
+            add(panel, BorderLayout.CENTER);
         }
     }
 }
