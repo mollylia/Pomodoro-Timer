@@ -53,6 +53,7 @@ public class PomodoroInterval implements Writable {
 
     // Method was based on Thingy.toJson() in:
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+    // EFFECTS: changes interval data to JSon
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -60,5 +61,19 @@ public class PomodoroInterval implements Writable {
         json.put("name", name);
         json.put("duration", duration);
         return json;
+    }
+
+    // EFFECTS: changes JSon to string
+    @Override
+    public String toString() {
+        String output = "";
+        JSONObject json = new JSONObject();
+        json.put("status", status);
+        json.put("name", name);
+        json.put("duration", duration);
+
+        output = json.toString(4);
+
+        return output;
     }
 }

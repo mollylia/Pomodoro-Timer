@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PomodoroIntervalTest {
     private PomodoroInterval pomoInterval;
 
-
     @BeforeEach
     public void setup() {
         pomoInterval = new PomodoroInterval(true, "study: CPSC 210", 3000);

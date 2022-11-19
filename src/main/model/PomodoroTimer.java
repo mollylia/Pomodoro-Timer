@@ -74,6 +74,7 @@ public class PomodoroTimer implements Writable {
 
     // Method was based on WorkRoom.toJson() in:
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+    // EFFECTS: changes interval data to JSon
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

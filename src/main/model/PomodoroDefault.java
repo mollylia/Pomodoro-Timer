@@ -6,6 +6,7 @@ package model;
 public enum PomodoroDefault {
     SHORT_STUDY, LONG_STUDY, SHORT_BREAK, LONG_BREAK;
 
+    // EFFECTS: sets the duration for each Pomodoro default choice
     public static int getPomodoroDefault(PomodoroDefault defaultTime) {
         switch (defaultTime) {
             case SHORT_STUDY:
