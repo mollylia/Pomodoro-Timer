@@ -35,31 +35,6 @@ public class PomodoroTimerDisplay extends TimerTask {
         }
     }
 
-//    public void getNextInterval() {
-//        PomodoroInterval nextInterval = pomoTimer.getNextInterval();
-//
-//        if (nextInterval != null) {
-//            runTime = nextInterval.getDuration();
-//            isStudy = nextInterval.getStatus();
-//        } else {
-//            initializeInterval();
-//        }
-//    }
-
-    // EFFECTS: initializes the time
-    public void initializeInterval() {
-        PomodoroInterval study1 = new PomodoroInterval(true, "study: CPSC 210", 5);
-        PomodoroInterval break1 = new PomodoroInterval(false, "break", 3);
-        PomodoroInterval study2 = new PomodoroInterval(true, "study: CPSC 210 lab", 5);
-
-        pomoTimer = new PomodoroTimer();
-        pomoTimer.addInterval(study1);
-        pomoTimer.addInterval(break1);
-        pomoTimer.addInterval(study2);
-
-        totalIntervalCounter = pomoTimer.length();
-    }
-
     // EFFECTS: runs the timer with the set intervals
     @Override
     public void run() {

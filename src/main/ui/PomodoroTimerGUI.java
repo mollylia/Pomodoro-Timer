@@ -86,11 +86,6 @@ public class PomodoroTimerGUI extends JFrame {
         JButton startTimerButton = new JButton("Start");
         KeyHandler stopTimerButton = new KeyHandler("Stop");
 
-//        panel.add(runningTime, BorderLayout.SOUTH);
-//        panel.add(stopTimerButton);
-//        panel.add(startTimerButton);
-//        add(panel, BorderLayout.CENTER);
-
         background.add(runningTime, BorderLayout.SOUTH);
         background.add(startTimerButton);
         background.add(stopTimerButton);
@@ -250,7 +245,6 @@ public class PomodoroTimerGUI extends JFrame {
 
 
     // Displays all the intervals in the timer
-    // TODO
     private class ViewIntervalDisplay extends JFrame {
         public ViewIntervalDisplay() {
             super("Current Intervals");
@@ -265,7 +259,7 @@ public class PomodoroTimerGUI extends JFrame {
             setVisible(true);
 
             PomodoroTimerApp app = new PomodoroTimerApp();
-            String output = app.toString();
+            String output = app.savePomodoroTimerToString();
 
             JTextArea textArea = new JTextArea(output, 50, 50);
             panel.add(textArea);

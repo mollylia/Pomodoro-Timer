@@ -199,9 +199,11 @@ public class PomodoroTimerApp {
         }
     }
 
-    public String toString() {
+    public String savePomodoroTimerToString() {
         String output = "";
         try {
+            pomoTimer = new PomodoroTimer("My Pomodoro Timer");
+            loadPomodoroTimer();
             jsonWriter.open();
             output = jsonWriter.writeToString(pomoTimer);
             jsonWriter.close();
