@@ -37,7 +37,7 @@ public class PomodoroTimerDisplay extends TimerTask {
         }
     }
 
-        // EFFECTS: initializes the time
+    // EFFECTS: initializes the time
     public void initializeInterval() {
         PomodoroInterval study1 = new PomodoroInterval(true, "study: CPSC 210", 5);
         PomodoroInterval break1 = new PomodoroInterval(false, "break", 3);

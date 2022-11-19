@@ -29,7 +29,7 @@ public class PomodoroTimerGUI extends JFrame {
     private void load() {
         PomodoroTimerApp app = new PomodoroTimerApp();
         app.loadPomodoroTimer();
-        app.runPomodoroTimer();
+//        app.runPomodoroTimer();
     }
 
     // EFFECTS: quits the open panel
@@ -61,8 +61,11 @@ public class PomodoroTimerGUI extends JFrame {
 
     // EFFECTS: initializes the main panel
     private void initControls() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new FlowLayout());
+        ImageIcon backgroundImage = new ImageIcon("./data/background.jpg");
+        JLabel background = new JLabel(backgroundImage);
+        add(background);
+//        JPanel panel = new JPanel();
+//        panel.setLayout(new FlowLayout());
 
         JMenuBar menuBar = createJMenuBar();
         setJMenuBar(menuBar);
@@ -77,10 +80,15 @@ public class PomodoroTimerGUI extends JFrame {
         JButton startTimerButton = new JButton("Start");
         KeyHandler stopTimerButton = new KeyHandler("Stop");
 
-        panel.add(runningTime, BorderLayout.SOUTH);
-        panel.add(stopTimerButton);
-        panel.add(startTimerButton);
-        add(panel, BorderLayout.CENTER);
+//        panel.add(runningTime, BorderLayout.SOUTH);
+//        panel.add(stopTimerButton);
+//        panel.add(startTimerButton);
+//        add(panel, BorderLayout.CENTER);
+
+        background.add(runningTime, BorderLayout.SOUTH);
+        background.add(startTimerButton);
+        background.add(stopTimerButton);
+        background.setLayout(new FlowLayout());
     }
 
     // EFFECTS: creates and adds tabs to menu bars on the main panel, and adds shortcuts
@@ -127,7 +135,7 @@ public class PomodoroTimerGUI extends JFrame {
     }
 
 
-    // Represents
+    // Handles buttons on panel
     private class MenuItemListener implements ActionListener {
         public MenuItemListener() {
         }
@@ -135,15 +143,12 @@ public class PomodoroTimerGUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Load Timer")) {
                 load();
-
             } else if (e.getActionCommand().equals("Save Timer")) {
                 save();
-
             } else if (e.getActionCommand().equals("Add Interval")) {
-                new SettingFrame();
-
+                new EditFrame();
             } else if (e.getActionCommand().equals("View Intervals")) {
-                ViewIntervalDisplay frame = new ViewIntervalDisplay();
+                new ViewIntervalDisplay();
             } else if (e.getActionCommand().equals("Quit")) {
                 quit();
             } else if (e.getActionCommand().equals("Start")) {
@@ -156,6 +161,7 @@ public class PomodoroTimerGUI extends JFrame {
         }
     }
 
+    // Handles menu
     private class MenuEvent extends JMenuBar implements ActionListener {
         private JFrame frame;
         private JMenuBar menuBar;
@@ -184,7 +190,7 @@ public class PomodoroTimerGUI extends JFrame {
         }
     }
 
-    // Represents
+    // Handles keys related to adding intervals
     private class KeyHandler extends JButton implements ActionListener {
         public KeyHandler(String text) {
             super(text);
@@ -201,14 +207,14 @@ public class PomodoroTimerGUI extends JFrame {
                 PomodoroTimerApp app = new PomodoroTimerApp();
                 PomodoroTimer pomoTimer = app.loadPomodoroTimer();
                 pomoTimer.addInterval(interval);
-
+                app.savePomodoroTimer();
             }
         }
     }
 
-    // Represents
-    private class SettingFrame extends JFrame {
-        public SettingFrame() {
+    // Allows user to add intervals to timer
+    private class EditFrame extends JFrame {
+        public EditFrame() {
             JPanel mainPanel = new JPanel();
             mainPanel.setLayout(new FlowLayout());
 
@@ -237,6 +243,7 @@ public class PomodoroTimerGUI extends JFrame {
     }
 
 
+    // Displays all the intervals in the timer
     // TODO
     private class ViewIntervalDisplay extends JFrame {
         public ViewIntervalDisplay() {
