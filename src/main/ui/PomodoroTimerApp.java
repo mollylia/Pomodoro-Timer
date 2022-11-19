@@ -8,6 +8,7 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.*;
 
 // Based on WorkRoomApp in:
@@ -70,6 +71,7 @@ public class PomodoroTimerApp {
         System.out.println("\tr -> run pomodoro timer");
         System.out.println("\ts -> save pomodoro timer");
         System.out.println("\tl -> load pomodoro timer");
+        System.out.println("\tp -> print pomodoro intervals");
         System.out.println("\tq -> quit");
     }
 
@@ -84,6 +86,8 @@ public class PomodoroTimerApp {
             savePomodoroTimer();
         } else if (command.equals("l")) {
             loadPomodoroTimer();
+        } else if (command.equals("p")) {
+            printIntervals();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -190,28 +194,29 @@ public class PomodoroTimerApp {
     }
 
     // EFFECTS: prints all the intervals in timer to the console
-    public void printIntervals() {
+    public String printIntervals() {
         List<PomodoroInterval> intervals = pomoTimer.getPomoIntervals();
-//        List<String> intervalList = new ArrayList<>();
+        String toBePrinted = "";
 
         for (PomodoroInterval interval : intervals) {
-            System.out.println(interval);
+            toBePrinted = toBePrinted + interval.toString();
         }
+        return toBePrinted;
     }
 
-    public String savePomodoroTimerToString() {
-        String output = "";
-        try {
-            pomoTimer = new PomodoroTimer("My Pomodoro Timer");
-            loadPomodoroTimer();
-            jsonWriter.open();
-            output = jsonWriter.writeToString(pomoTimer);
-            jsonWriter.close();
-//                System.out.println("Saved " + pomoTimer.getName() + " to " + JSON_STORE);
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
-        }
-        return output;
-    }
+//    public String savePomodoroTimerToString() {
+//        String output = "";
+//        try {
+//            pomoTimer = new PomodoroTimer("My Pomodoro Timer");
+//            loadPomodoroTimer();
+//            jsonWriter.open();
+//            output = jsonWriter.writeToString(pomoTimer);
+//            jsonWriter.close();
+////                System.out.println("Saved " + pomoTimer.getName() + " to " + JSON_STORE);
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Unable to write to file: " + JSON_STORE);
+//        }
+//        return output;
+//    }
 
 }

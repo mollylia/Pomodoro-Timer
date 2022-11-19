@@ -50,6 +50,20 @@ public class PomodoroInterval implements Writable {
         return duration;
     }
 
+    // EFFECTS: represents string representation of this interval
+    public String toString() {
+
+        return name + " (" + getIntervalType() + "): " + duration + " seconds";
+    }
+
+    public String getIntervalType() {
+        if (status) {
+            return "study";
+        } else {
+            return "break";
+        }
+    }
+
 
     // Method was based on Thingy.toJson() in:
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git

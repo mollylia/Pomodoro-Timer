@@ -2,16 +2,21 @@ package ui;
 
 import model.PomodoroInterval;
 import model.PomodoroTimer;
+import org.json.JSONObject;
+import persistence.JsonReader;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.concurrent.Flow;
 
 // Represents GUI for the Pomodoro timer
 public class PomodoroTimerGUI extends JFrame {
     private JTextField textName;
     private JTextField textInterval;
+    private JLabel history;
     private String savedFilePath = "./data/pomodorotimer.json";
 
     // EFFECTS: constructs the main panel
@@ -209,6 +214,8 @@ public class PomodoroTimerGUI extends JFrame {
                 PomodoroTimer pomoTimer = app.loadPomodoroTimer();
                 pomoTimer.addInterval(interval);
                 app.savePomodoroTimer();
+
+
             }
         }
     }
@@ -249,6 +256,7 @@ public class PomodoroTimerGUI extends JFrame {
         public ViewIntervalDisplay() {
             super("Current Intervals");
 
+            JFrame frame = new JFrame();
             JPanel panel = new JPanel();
             panel.setLayout(new FlowLayout());
 
@@ -259,11 +267,18 @@ public class PomodoroTimerGUI extends JFrame {
             setVisible(true);
 
             PomodoroTimerApp app = new PomodoroTimerApp();
-            String output = app.savePomodoroTimerToString();
 
-            JTextArea textArea = new JTextArea(output, 50, 50);
-            panel.add(textArea);
-            add(panel, BorderLayout.CENTER);
+
+//            JTextArea textArea = new JTextArea(app.printIntervals(), 50,50);
+//            panel.add(textArea);
+//            add(panel, BorderLayout.CENTER);
+
+//            PomodoroTimerApp app = new PomodoroTimerApp();
+//            String output = app.savePomodoroTimerToString();
+//
+//            JTextArea textArea = new JTextArea(output, 50, 50);
+//            panel.add(textArea);
+//            add(panel, BorderLayout.CENTER);
         }
     }
 }
