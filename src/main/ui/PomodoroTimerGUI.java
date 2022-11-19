@@ -7,47 +7,57 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 // Represents GUI for the Pomodoro timer
 public class PomodoroTimerGUI extends JFrame {
-    JTextField textName;
-    JTextField textInterval;
-    private String savedFileFullPath = "./data/pomodorotimer.json";
+    private JTextField textName;
+    private JTextField textInterval;
+    private String savedFilePath = "./data/pomodorotimer.json";
 
     // EFFECTS: constructs the main panel
     public PomodoroTimerGUI() {
         initControls();
     }
 
-//    // EFFECTS: saves the current Pomodoro timer
-//    private void save() {
-//        PomodoroTimerApp app = new PomodoroTimerApp();
-//        app.savePomodoroTimer();
-//    }
-
+    // EFFECTS: saves the current Pomodoro timer to file
     private void save() {
-        try {
-            savedFileFullPath = showOpenFileDialog("save");
-            PomodoroTimerApp app = new PomodoroTimerApp(savedFileFullPath);
-            app.savePomodoroTimer();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        PomodoroTimerApp app = new PomodoroTimerApp();
+        app.savePomodoroTimer();
     }
 
+    // EFFECTS: loads saved Pomodoro timer file on computer
     private void load() {
-        try {
-            String selectedFileFullPath = showOpenFileDialog("open");
-            PomodoroTimerApp app = new PomodoroTimerApp(selectedFileFullPath);
-            app.loadPomodoroTimer();
-            //app.runPomodoroTimer();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        PomodoroTimerApp app = new PomodoroTimerApp();
+        app.loadPomodoroTimer();
+        app.runPomodoroTimer();
     }
 
+    // EFFECTS: quits the open panel
+    public void quit() {
+        int result = JOptionPane.showConfirmDialog(null,
+                "Would you like to save the timer?",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE);
+
+        switch (result) {
+            case JOptionPane.YES_OPTION:
+                if (savedFilePath == "") {
+                    savedFilePath = "./data/pomodorotimer.json";
+                }
+
+                PomodoroTimerApp app = new PomodoroTimerApp(savedFilePath);
+                app.savePomodoroTimer();
+
+                JOptionPane.showMessageDialog(null, "The timer has been successfully saved");
+                System.exit(0);
+                break;
+
+            case JOptionPane.NO_OPTION:
+                System.exit(0);
+                break;
+        }
+    }
 
     // EFFECTS: initializes the main panel
     private void initControls() {
@@ -73,8 +83,7 @@ public class PomodoroTimerGUI extends JFrame {
         add(panel, BorderLayout.CENTER);
     }
 
-
-    // EFFECTS: creates and adds the menu bars on the main panel, and adds shortcuts
+    // EFFECTS: creates and adds tabs to menu bars on the main panel, and adds shortcuts
     public JMenuBar createJMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu;
@@ -117,65 +126,6 @@ public class PomodoroTimerGUI extends JFrame {
         menu.add(menuItem);
     }
 
-    private String showOpenFileDialog(String status) {
-        String selectedFileFullPath = "";
-
-        JFileChooser fileChooser = new JFileChooser();
-        if(status == "save"){
-            fileChooser.setDialogTitle("Specify a file to save");
-        }
-        else {
-            fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-        }
-        int result = fileChooser.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = fileChooser.getSelectedFile();
-            selectedFileFullPath = selectedFile.getAbsolutePath();
-            //System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-        }
-
-        return selectedFileFullPath;
-    }
-
-    /***************************************File Dialog***************************************/
-
-    /***************************************Quit**********************************************/
-    public void quit() {
-        //new QuitFrame();
-        //JOptionPane.showMessageDialog(null, "Hello Java");
-        //JOptionPane.showMessageDialog(null, "You have less amount, please recharge","Apocalyptic message", JOptionPane.WARNING_MESSAGE);
-
-        int result = JOptionPane.showConfirmDialog(null,
-                "Are you sure you want to quit, Save your file...",
-                "Confirmation",
-                JOptionPane.OK_CANCEL_OPTION,
-                JOptionPane.INFORMATION_MESSAGE);
-
-        switch (result) {
-            case JOptionPane.YES_OPTION:
-                //System.out.println("Yes");
-                if(savedFileFullPath == "")
-                    savedFileFullPath = "./data/pomodorotimer.json";
-
-                PomodoroTimerApp app = new PomodoroTimerApp(savedFileFullPath);
-                app.savePomodoroTimer();
-
-                JOptionPane.showMessageDialog(null, "You list saved successfully");
-                break;
-            case JOptionPane.NO_OPTION:
-                //System.out.println("No");
-                break;
-            case JOptionPane.CANCEL_OPTION:
-                //System.out.println("Cancel");
-                break;
-            case JOptionPane.CLOSED_OPTION:
-                //System.out.println("Closed");
-                break;
-        }
-    }
-
-
-
 
     // Represents
     private class MenuItemListener implements ActionListener {
@@ -184,9 +134,6 @@ public class PomodoroTimerGUI extends JFrame {
 
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Load Timer")) {
-//                PomodoroTimerApp app = new PomodoroTimerApp();
-//                app.loadPomodoroTimer();
-//              app.runPomodoroTimer();
                 load();
 
             } else if (e.getActionCommand().equals("Save Timer")) {
@@ -199,11 +146,6 @@ public class PomodoroTimerGUI extends JFrame {
                 ViewIntervalDisplay frame = new ViewIntervalDisplay();
             } else if (e.getActionCommand().equals("Quit")) {
                 quit();
-            } else if (e.getActionCommand().equals("Yes")) {
-                save();
-                System.exit(0);
-            } else if (e.getActionCommand().equals("No")) {
-                System.exit(0);
             } else if (e.getActionCommand().equals("Start")) {
                 // TODO
             } else if (e.getActionCommand().equals("Stop")) {
@@ -242,8 +184,7 @@ public class PomodoroTimerGUI extends JFrame {
         }
     }
 
-    /********************************Menu example********************************/
-
+    // Represents
     private class KeyHandler extends JButton implements ActionListener {
         public KeyHandler(String text) {
             super(text);
@@ -253,8 +194,9 @@ public class PomodoroTimerGUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
             System.out.println(e.getSource());
 
-            if (e.getActionCommand().equals("Add New Interval")) {
-                PomodoroInterval interval = new PomodoroInterval(true, textName.getText(), 1000);
+            if (e.getActionCommand().equals("Add")) {
+                PomodoroInterval interval = new PomodoroInterval(true, textName.getText(),
+                        Integer.parseInt(textInterval.getText()));
 
                 PomodoroTimerApp app = new PomodoroTimerApp();
                 PomodoroTimer pomoTimer = app.loadPomodoroTimer();
@@ -264,6 +206,7 @@ public class PomodoroTimerGUI extends JFrame {
         }
     }
 
+    // Represents
     private class SettingFrame extends JFrame {
         public SettingFrame() {
             JPanel mainPanel = new JPanel();
@@ -308,47 +251,65 @@ public class PomodoroTimerGUI extends JFrame {
             setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             setVisible(true);
 
-//            PomodoroTimer pomoTimer = new PomodoroTimer();
-//            String textArea = pomoTimer.getPomoIntervals().toString();
-//            System.out.println(textArea);
-
             PomodoroTimerApp app = new PomodoroTimerApp();
             String output = app.toString();
-//            app.printIntervals();
-//            JTextArea textArea = new JTextArea();
-//            panel.add(textArea);
 
             JTextArea textArea = new JTextArea(output, 50, 50);
             panel.add(textArea);
             add(panel, BorderLayout.CENTER);
         }
     }
-
-    //TODO
-    public class QuitFrame extends JFrame {
-        public QuitFrame() {
-            JPanel panel = new JPanel();
-            panel.setLayout(new FlowLayout());
-
-            setSize(200, 150);
-            setLocationRelativeTo(null);
-            setResizable(false);
-            setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-            setVisible(true);
-
-            JLabel saveMessage = new JLabel("Do you want to save your current Pomodoro timer?");
-
-            KeyHandler yesSave = new KeyHandler("Yes");
-            KeyHandler noSave = new KeyHandler("No");
-
-            panel.add(saveMessage);
-            panel.add(yesSave);
-            panel.add(noSave);
-            add(panel, BorderLayout.CENTER);
-        }
-    }
 }
 
+
+//    private void save() {
+//        PomodoroTimerApp app = new PomodoroTimerApp();
+//        app.savePomodoroTimer();
+//    }
+//    private void save() {
+//        try {
+//            savedFileFullPath = showOpenFileDialog("save");
+//            PomodoroTimerApp app = new PomodoroTimerApp(savedFileFullPath);
+//            app.savePomodoroTimer();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    private void load() {
+//        try {
+//            String selectedFileFullPath = showOpenFileDialog("open");
+//            PomodoroTimerApp app = new PomodoroTimerApp(selectedFileFullPath);
+//            app.loadPomodoroTimer();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    public void quit() {
+//        int result = JOptionPane.showConfirmDialog(null,
+//                "Would you like to save the timer?",
+//                "Confirmation",
+//                JOptionPane.OK_CANCEL_OPTION,
+//                JOptionPane.INFORMATION_MESSAGE);
+//
+//        switch (result) {
+//            case JOptionPane.YES_OPTION:
+//                if (savedFileFullPath == "") {
+//                    savedFileFullPath = "./data/pomodorotimer.json";
+//                }
+//
+//                PomodoroTimerApp app = new PomodoroTimerApp(savedFileFullPath);
+//                app.savePomodoroTimer();
+//
+//                JOptionPane.showMessageDialog(null, "The timer has been successfully saved");
+//                break;
+//            case JOptionPane.NO_OPTION:
+//                break;
+//            case JOptionPane.CANCEL_OPTION:
+//                break;
+//            case JOptionPane.CLOSED_OPTION:
+//                break;
+//        }
+//    }
 //    public void actionPerformed(ActionEvent e) {
 //            if (e.getActionCommand().equals("New Timer")) {
 //                // do nothing for now

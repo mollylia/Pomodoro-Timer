@@ -62,18 +62,4 @@ public class PomodoroInterval implements Writable {
         json.put("duration", duration);
         return json;
     }
-
-    // EFFECTS: changes JSon to string
-    @Override
-    public String toString() {
-        String output = "";
-        JSONObject json = new JSONObject();
-        json.put("status", status);
-        json.put("name", name);
-        json.put("duration", duration);
-
-        output = json.toString(4);
-
-        return output;
-    }
 }
