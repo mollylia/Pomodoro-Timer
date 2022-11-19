@@ -32,6 +32,12 @@ public class PomodoroTimerGUI extends JFrame {
 //        app.runPomodoroTimer();
     }
 
+    // EFFECTS: runs the timer with timer intervals
+    private void runTimer() {
+        PomodoroTimerApp app = new PomodoroTimerApp();
+        app.runPomodoroTimer();
+    }
+
     // EFFECTS: quits the open panel
     public void quit() {
         int result = JOptionPane.showConfirmDialog(null,
@@ -152,7 +158,7 @@ public class PomodoroTimerGUI extends JFrame {
             } else if (e.getActionCommand().equals("Quit")) {
                 quit();
             } else if (e.getActionCommand().equals("Start")) {
-                // TODO
+                runTimer();
             } else if (e.getActionCommand().equals("Stop")) {
                 // TODO
             } else {
