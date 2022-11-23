@@ -1,8 +1,110 @@
 {
     "name": "My Pomodoro Timer",
-    "pomoIntervals": [{
-        "duration": 1,
-        "name": "test",
-        "status": true
-    }]
+    "pomoIntervals": [
+        {
+            "duration": 1,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 2,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 3,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 4,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 5,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 6,
+            "name": "test",
+            "status": true
+        },
+        {
+            "duration": 7,
+            "name": "hehe",
+            "status": true
+        }
+    ]
 }

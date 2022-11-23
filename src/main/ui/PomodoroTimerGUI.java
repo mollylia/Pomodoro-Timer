@@ -13,7 +13,6 @@ public class PomodoroTimerGUI extends JFrame {
     private JTextField textName;
     private JTextField textInterval;
     private String savedFilePath = "./data/pomodorotimer.json";
-    private PomodoroTimerData data;
     private PomodoroTimer pomoTimer;
     private PomodoroTimerApp app;
 
@@ -25,17 +24,13 @@ public class PomodoroTimerGUI extends JFrame {
 
     // EFFECTS: saves the current Pomodoro timer to file
     private void save() {
-//        PomodoroTimerApp app = new PomodoroTimerApp();
         app.savePomodoroTimer();
-//        data.savePomodoroTimer(pomoTimer);
     }
 
     // EFFECTS: loads saved Pomodoro timer file on computer
     private void load() {
-//        PomodoroTimerApp app = new PomodoroTimerApp();
         app.loadPomodoroTimer();
 //        app.runPomodoroTimer();
-//        data.loadPomodoroTimer(pomoTimer);
     }
 
     // EFFECTS: runs the timer with timer intervals
@@ -267,21 +262,22 @@ public class PomodoroTimerGUI extends JFrame {
 
             setSize(400, 300);
             setLocationRelativeTo(null);
-//            setResizable(false);
-            setResizable(true);
+            setResizable(false);
+//            setResizable(true);
             setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             setVisible(true);
 
-//            PomodoroTimerApp app = new PomodoroTimerApp();
-//            JTextArea textArea = new JTextArea(app.printIntervals(), 50,50);
-//            panel.add(textArea);
-//            add(panel, BorderLayout.CENTER);
+            pomoTimer = app.loadPomodoroTimer();
 
-//            PomodoroTimerApp app = new PomodoroTimerApp();
-            String output = app.savePomodoroTimerToString();
+            // todo add citations here
+            String output = "<html>";
+            for (int i = 0; i < pomoTimer.length(); i++) {
+                output += pomoTimer.getNextInterval().toString() + "<br>";
+            }
+            output += "</html>";
 
-            JTextArea textArea = new JTextArea(output, 50, 50);
-            panel.add(textArea);
+            JLabel currentIntervalsText = new JLabel(output);
+            panel.add(currentIntervalsText);
             add(panel, BorderLayout.CENTER);
         }
     }
