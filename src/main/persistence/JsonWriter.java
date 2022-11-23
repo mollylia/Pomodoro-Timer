@@ -27,12 +27,13 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of Pomodoro Timer to file
     public void write(PomodoroTimer pomoTimer) {
         JSONObject json = pomoTimer.toJson();
         saveToFile(json.toString(TAB));
     }
 
+    // EFFECTS: writes JSON file as string
     public String writeToString(PomodoroTimer pomoTimer) {
         String output = "";
         JSONObject json = pomoTimer.toJson();

@@ -2,48 +2,49 @@ package ui;
 
 import model.PomodoroInterval;
 import model.PomodoroTimer;
-import org.json.JSONObject;
-import persistence.JsonReader;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.concurrent.Flow;
 
 // Represents GUI for the Pomodoro timer
 public class PomodoroTimerGUI extends JFrame {
     private JTextField textName;
     private JTextField textInterval;
-    private JLabel history;
     private String savedFilePath = "./data/pomodorotimer.json";
+    private PomodoroTimerData data;
+    private PomodoroTimer pomoTimer;
+    private PomodoroTimerApp app;
 
     // EFFECTS: constructs the main panel
     public PomodoroTimerGUI() {
+        app = new PomodoroTimerApp();
         initControls();
     }
 
     // EFFECTS: saves the current Pomodoro timer to file
     private void save() {
-        PomodoroTimerApp app = new PomodoroTimerApp();
+//        PomodoroTimerApp app = new PomodoroTimerApp();
         app.savePomodoroTimer();
+//        data.savePomodoroTimer(pomoTimer);
     }
 
     // EFFECTS: loads saved Pomodoro timer file on computer
     private void load() {
-        PomodoroTimerApp app = new PomodoroTimerApp();
+//        PomodoroTimerApp app = new PomodoroTimerApp();
         app.loadPomodoroTimer();
 //        app.runPomodoroTimer();
+//        data.loadPomodoroTimer(pomoTimer);
     }
 
     // EFFECTS: runs the timer with timer intervals
     private void runTimer() {
-        PomodoroTimerApp app = new PomodoroTimerApp();
+//        PomodoroTimerApp app = new PomodoroTimerApp();
         app.runPomodoroTimer();
     }
 
-    // EFFECTS: quits the open panel
+    // EFFECTS: quits the main panel
     public void quit() {
         int result = JOptionPane.showConfirmDialog(null,
                 "Would you like to save the timer?",
@@ -75,11 +76,13 @@ public class PomodoroTimerGUI extends JFrame {
         ImageIcon backgroundImage = new ImageIcon("./data/background.jpg");
         JLabel background = new JLabel(backgroundImage);
         add(background);
+
 //        JPanel panel = new JPanel();
 //        panel.setLayout(new FlowLayout());
 
         JMenuBar menuBar = createJMenuBar();
         setJMenuBar(menuBar);
+
 
         setSize(400, 300);
         setLocationRelativeTo(null);
@@ -155,12 +158,13 @@ public class PomodoroTimerGUI extends JFrame {
                 new EditFrame();
             } else if (e.getActionCommand().equals("View Intervals")) {
                 new ViewIntervalDisplay();
+                save();
             } else if (e.getActionCommand().equals("Quit")) {
                 quit();
             } else if (e.getActionCommand().equals("Start")) {
                 runTimer();
             } else if (e.getActionCommand().equals("Stop")) {
-                // TODO
+                //
             } else {
                 System.out.println("Coming soon");
             }
@@ -214,8 +218,9 @@ public class PomodoroTimerGUI extends JFrame {
                 PomodoroTimer pomoTimer = app.loadPomodoroTimer();
                 pomoTimer.addInterval(interval);
                 app.savePomodoroTimer();
+//                data.savePomodoroTimer(pomoTimer);
 
-
+                // make interval into JLabel and then added to view panel
             }
         }
     }
@@ -262,7 +267,8 @@ public class PomodoroTimerGUI extends JFrame {
 
             setSize(400, 300);
             setLocationRelativeTo(null);
-            setResizable(false);
+//            setResizable(false);
+            setResizable(true);
             setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             setVisible(true);
 
@@ -271,7 +277,7 @@ public class PomodoroTimerGUI extends JFrame {
 //            panel.add(textArea);
 //            add(panel, BorderLayout.CENTER);
 
-            PomodoroTimerApp app = new PomodoroTimerApp();
+//            PomodoroTimerApp app = new PomodoroTimerApp();
             String output = app.savePomodoroTimerToString();
 
             JTextArea textArea = new JTextArea(output, 50, 50);

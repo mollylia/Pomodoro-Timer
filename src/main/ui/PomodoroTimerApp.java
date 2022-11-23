@@ -8,7 +8,6 @@ import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.*;
 
 // Based on WorkRoomApp in:
@@ -194,14 +193,12 @@ public class PomodoroTimerApp {
     }
 
     // EFFECTS: prints all the intervals in timer to the console
-    public String printIntervals() {
+    public void printIntervals() {
         List<PomodoroInterval> intervals = pomoTimer.getPomoIntervals();
-        String toBePrinted = "";
 
         for (PomodoroInterval interval : intervals) {
-            toBePrinted = toBePrinted + interval.toString();
+            System.out.println(interval);
         }
-        return toBePrinted;
     }
 
     public String savePomodoroTimerToString() {
