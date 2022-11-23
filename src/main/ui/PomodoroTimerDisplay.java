@@ -1,6 +1,5 @@
 package ui;
 
-import model.PomodoroDefault;
 import model.PomodoroInterval;
 import model.PomodoroTimer;
 
