@@ -11,10 +11,17 @@ import java.awt.event.ActionListener;
 
 // Allows user to add intervals to timer
 public class AddIntervalFrame extends JFrame {
+    private PomodoroTimer pomoTimer;
+    private PomodoroTimerApp app;
+
     private JTextField textName;
     private JTextField textInterval;
 
-    public AddIntervalFrame() {
+//  public AddIntervalFrame() {
+    public AddIntervalFrame(PomodoroTimerApp app, PomodoroTimer timer) {
+        this.app = app;
+        pomoTimer = timer;
+
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new FlowLayout());
 
@@ -44,8 +51,8 @@ public class AddIntervalFrame extends JFrame {
 
     // Handles keys related to adding intervals
     public class ButtonKeyHandler extends JButton implements ActionListener {
-        PomodoroTimer pomoTimer;
-        PomodoroTimerApp app;
+//        PomodoroTimer pomoTimer;
+//        PomodoroTimerApp app;
 
 //        private java.util.Timer timer;
 //        private TimerTask timerInterval;
@@ -65,6 +72,7 @@ public class AddIntervalFrame extends JFrame {
                         Integer.parseInt(textInterval.getText()));
 
                 pomoTimer.addInterval(interval);
+                app.savePomodoroTimer();
             }
 //            else if (e.getActionCommand().equals("Start")) {
 //                runningTime.setText("Timer running ");

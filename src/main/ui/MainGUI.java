@@ -109,7 +109,7 @@ public class MainGUI extends JFrame {
 //        timer.schedule(timerInterval, 0, 1000);
     }
 
-    // EFFECTS: creates and adds tabs to menu bars on the main panel, and adds shortcuts
+    // EFFECTS: adds tabs to menu bars on the main panel, and adds shortcuts
     public JMenuBar createJMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         JMenu menu;
@@ -167,11 +167,12 @@ public class MainGUI extends JFrame {
                 save();
             } else if (e.getActionCommand().equals("Add Interval")) {
 //                new AddIntervalFrame(textName, textInterval);
-                new AddIntervalFrame();
+//                new AddIntervalFrame();
+                new AddIntervalFrame(app, pomoTimer);
             } else if (e.getActionCommand().equals("View Intervals")) {
 //                new ViewIntervalDisplay();
                 new ViewIntervalFrame(app);
-                save();
+//                save();
             } else if (e.getActionCommand().equals("Quit")) {
                 quit();
             } else {
