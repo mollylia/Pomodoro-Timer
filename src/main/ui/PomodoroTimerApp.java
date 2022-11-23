@@ -6,9 +6,11 @@ import model.PomodoroTimer;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+import java.util.Timer;
 
 // Based on WorkRoomApp in:
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
@@ -19,6 +21,7 @@ public class PomodoroTimerApp {
     private PomodoroTimer pomoTimer;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+    private JLabel timerDisplay;
 
     // EFFECTS: constructs Pomodoro timer and runs application
     public PomodoroTimerApp() {
@@ -30,16 +33,19 @@ public class PomodoroTimerApp {
     }
 
 
-    public PomodoroTimerApp(String filePath) {
+    public PomodoroTimerApp(JLabel runTime) {
         pomoTimer = new PomodoroTimer("My Pomodoro Timer");
-        if (filePath != "") {
-            jsonWriter = new JsonWriter(filePath);
-            jsonReader = new JsonReader(filePath);
-        } else {
-            jsonWriter = new JsonWriter(JSON_STORE);
-            jsonReader = new JsonReader(JSON_STORE);
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
+        timerDisplay = runTime;
+
+        if (timerDisplay == null) {
+            timerDisplay = new JLabel("No Pomodoro Timer");
         }
+
+
     }
+
 
     // EFFECTS: processes user input
     public void runPomodoroApp() {
@@ -143,7 +149,7 @@ public class PomodoroTimerApp {
             System.out.println("There are no intervals to run...");
         } else {
             Timer timer = new Timer();
-            TimerTask timerInterval = new ui.PomodoroTimerDisplay(pomoTimer);
+            TimerTask timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, timerDisplay);
             timer.schedule(timerInterval, 0, 1000);
         }
     }
@@ -201,19 +207,19 @@ public class PomodoroTimerApp {
         }
     }
 
-    public String savePomodoroTimerToString() {
-        String output = "";
-        try {
-            pomoTimer = new PomodoroTimer("My Pomodoro Timer");
-            loadPomodoroTimer();
-            jsonWriter.open();
-            output = jsonWriter.writeToString(pomoTimer);
-            jsonWriter.close();
-//                System.out.println("Saved " + pomoTimer.getName() + " to " + JSON_STORE);
-        } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
-        }
-        return output;
-    }
+//    public String savePomodoroTimerToString() {
+//        String output = "";
+//        try {
+//            pomoTimer = new PomodoroTimer("My Pomodoro Timer");
+//            loadPomodoroTimer();
+//            jsonWriter.open();
+//            output = jsonWriter.writeToString(pomoTimer);
+//            jsonWriter.close();
+////                System.out.println("Saved " + pomoTimer.getName() + " to " + JSON_STORE);
+//        } catch (FileNotFoundException e) {
+//            System.out.println("Unable to write to file: " + JSON_STORE);
+//        }
+//        return output;
+//    }
 
 }
