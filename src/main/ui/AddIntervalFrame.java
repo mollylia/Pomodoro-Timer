@@ -8,7 +8,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 // Allows user to add intervals to timer
 public class AddIntervalFrame extends JFrame {
     private PomodoroTimer pomoTimer;
@@ -37,6 +36,13 @@ public class AddIntervalFrame extends JFrame {
         JLabel labelInterval = new JLabel("Interval");
         textInterval = new JTextField("", 20);
 
+
+        // NEWLY ADDED
+        String intervalStatus[] = {"study", "break"};
+        JComboBox statusSelection = new JComboBox(intervalStatus);
+
+        // TODO interval status listener
+
         ButtonKeyHandler addButton = new ButtonKeyHandler("Add");
 
         mainPanel.add(labelName);
@@ -44,6 +50,7 @@ public class AddIntervalFrame extends JFrame {
         mainPanel.add(labelInterval);
         mainPanel.add(textInterval);
         mainPanel.add(addButton);
+        mainPanel.add(statusSelection);
 
         add(mainPanel, BorderLayout.CENTER);
     }
@@ -86,5 +93,8 @@ public class AddIntervalFrame extends JFrame {
 //            }
         }
     }
+
+
+
 
 }

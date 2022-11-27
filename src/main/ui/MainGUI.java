@@ -1,11 +1,16 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.PomodoroTimer;
+import model.EventLogDisplay;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,6 +25,7 @@ public class MainGUI extends JFrame {
     private java.util.Timer timer;
     private TimerTask timerInterval;
     private JLabel runningTime;
+    private JLabel displayedTime;
 
     // EFFECTS: constructs the main panel
     public MainGUI() {
@@ -35,6 +41,7 @@ public class MainGUI extends JFrame {
     // EFFECTS: loads saved Pomodoro timer file on computer
     private void load() {
         pomoTimer = app.loadPomodoroTimer();
+
 //        app.runPomodoroTimer();
     }
 
@@ -81,14 +88,13 @@ public class MainGUI extends JFrame {
         JMenuBar menuBar = createJMenuBar();
         setJMenuBar(menuBar);
 
-
         setSize(400, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         setVisible(true);
 
-        runningTime = new JLabel("Run Time");
+        runningTime = new JLabel();
+//        runningTime = new JLabel("Run Time");
 //        JButton startTimerButton = new JButton("Start");
 //        startTimerButton.addActionListener(new ButtonKeyHandler("Start"));
 
@@ -103,18 +109,33 @@ public class MainGUI extends JFrame {
         background.add(stopTimerButton);
         background.setLayout(new FlowLayout());
 
+        windowListener();
+
 
 //        timer = new Timer();
 //        timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, runningTime);
 //        timer.schedule(timerInterval, 0, 1000);
     }
 
+
+    private void windowListener() {
+        this.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                quit();
+                printLog();
+//                new EventLogDisplay().printLog();
+
+            }
+        });
+    }
+
     // EFFECTS: adds tabs to menu bars on the main panel, and adds shortcuts
     public JMenuBar createJMenuBar() {
         JMenuBar menuBar = new JMenuBar();
-        JMenu menu;
+        JMenu menu = new JMenu("File");
 
-        menu = new JMenu("File");
         addMenuItem(menuBar, menu, "New Timer",
                 KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, ActionEvent.CTRL_MASK));
         menu.addSeparator();
@@ -152,11 +173,18 @@ public class MainGUI extends JFrame {
         menu.add(menuItem);
     }
 
+    private void printLog() {
+        for (Event event : EventLog.getInstance()) {
+            System.out.println(event.toString());
+        }
+    }
+
 
     // Handles buttons on panel
     private class MenuKeyHandler implements ActionListener {
         public MenuKeyHandler() {
         }
+
 
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("New Timer")) {
@@ -171,16 +199,28 @@ public class MainGUI extends JFrame {
                 new AddIntervalFrame(app, pomoTimer);
             } else if (e.getActionCommand().equals("View Intervals")) {
 //                new ViewIntervalDisplay();
-                new ViewIntervalFrame(app);
 //                save();
+                new ViewIntervalFrame(app);
             } else if (e.getActionCommand().equals("Quit")) {
                 quit();
+//                new EventLogDisplay().printLog();
+                printLog();
             } else {
                 System.out.println("Coming soon");
             }
         }
     }
 
+    public void start() {
+        pomoTimer = app.loadPomodoroTimer();
+        timer = new Timer();
+        timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, runningTime);
+        timer.schedule(timerInterval, 0, 1000);
+    }
+
+    public void pause() {
+        timer.cancel();
+    }
 
     // Handles main panel buttons
     private class MainPanelKeyHandler extends JButton implements ActionListener {
@@ -191,6 +231,17 @@ public class MainGUI extends JFrame {
 
         public void actionPerformed(ActionEvent e) {
             System.out.println(e.getSource());
+//
+//            if (e.getActionCommand().equals("Start")) {
+//                start();
+//                setText("Pause");
+//            } else if (e.getActionCommand().equals("Pause")) {
+//                pause();
+//                setText("Resume");
+//            } else {
+//                start();
+//                setText("Pause");
+//            }
 
 //            if (e.getActionCommand().equals("Add")) {
 //                pomoTimer = app.loadPomodoroTimer();
@@ -199,20 +250,45 @@ public class MainGUI extends JFrame {
 //
 //                pomoTimer.addInterval(interval);
 //            }
+
             if (e.getActionCommand().equals("Start")) {
-                runningTime.setText("Timer running ");
+                EventLog.getInstance().logEvent(new Event("Timer started"));
+                new EventLogDisplay().printLog();
+
+                app = new PomodoroTimerApp(runningTime);
+                pomoTimer = app.loadPomodoroTimer();
+
+//                if (timer != null) {
+//                    timer.cancel();
+//                    timer.purge();
+//                }
+//
+//                timer = new java.util.Timer();
+//                timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, runningTime);
+//                timer.schedule(timerInterval, 0, 1000);
+
+
+//                runningTime.setText("Timer running ");
                 pomoTimer = app.loadPomodoroTimer();
                 timer = new Timer();
                 timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, runningTime);
                 timer.schedule(timerInterval, 0, 1000);
+
+
             } else if (e.getActionCommand().equals("Stop")) {
-                runningTime.setText("Timer stopped");
+                EventLog.getInstance().logEvent(new Event("Timer stopped"));
+//                if (timer != null) {
+//                    timer.cancel();
+//                    timer.purge();
+//                }
+
+//                runningTime.setText("Timer stopped");
                 timer.cancel();
             }
         }
     }
-//
-//
+
+
 //    // Allows user to add intervals to timer
 //    private class AddIntervalFrame extends JFrame {
 //        public AddIntervalFrame() {
@@ -241,7 +317,7 @@ public class MainGUI extends JFrame {
 //
 //            add(mainPanel, BorderLayout.CENTER);
 //        }
-//    }
+//}
 
 
 //    // Displays all the intervals in the timer

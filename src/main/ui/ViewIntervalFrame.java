@@ -34,6 +34,7 @@ public class ViewIntervalFrame extends JFrame {
 
         // Adding new lines in JLabel from:
         // https://stackoverflow.com/questions/1090098/newline-in-jlabel
+
         String output = "<html>";
         for (int i = 0; i < pomoTimer.length(); i++) {
             output += pomoTimer.getNextInterval().toString() + "<br>";
