@@ -16,7 +16,7 @@ public class AddIntervalFrame extends JFrame {
     private JTextField textName;
     private JTextField textInterval;
 
-//  public AddIntervalFrame() {
+    //  public AddIntervalFrame() {
     public AddIntervalFrame(PomodoroTimerApp app, PomodoroTimer timer) {
         this.app = app;
         pomoTimer = timer;
@@ -93,8 +93,6 @@ public class AddIntervalFrame extends JFrame {
 //            }
         }
     }
-
-
 
 
 }

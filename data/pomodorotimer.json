@@ -1,20 +1,8 @@
 {
     "name": "My Pomodoro Timer",
-    "pomoIntervals": [
-        {
-            "duration": 10,
-            "name": "test",
-            "status": true
-        },
-        {
-            "duration": 8,
-            "name": "test",
-            "status": true
-        },
-        {
-            "duration": 4,
-            "name": "test",
-            "status": true
-        }
-    ]
+    "pomoIntervals": [{
+        "duration": 10,
+        "name": "test",
+        "status": true
+    }]
 }

@@ -189,7 +189,7 @@ public class PomodoroTimerApp {
     public PomodoroTimer loadPomodoroTimer() {
         try {
             pomoTimer = jsonReader.read();
-//            System.out.println("Loaded " + pomoTimer.getName() + " from " + JSON_STORE);
+            System.out.println("Loaded " + pomoTimer.getName() + " from " + JSON_STORE);
 //            EventLog.getInstance().logEvent(new model.Event("Loaded Pomodoro Timer"));
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
