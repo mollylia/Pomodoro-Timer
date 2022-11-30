@@ -159,9 +159,9 @@ public class PomodoroTimerApp {
             jsonWriter.open();
             jsonWriter.write(pomoTimer);
             jsonWriter.close();
-            System.out.println("Saved " + pomoTimer.getName() + " to " + JSON_STORE);
+//            System.out.println("Saved " + pomoTimer.getName() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
+//            System.out.println("Unable to write to file: " + JSON_STORE);
         }
     }
 
@@ -189,10 +189,9 @@ public class PomodoroTimerApp {
     public PomodoroTimer loadPomodoroTimer() {
         try {
             pomoTimer = jsonReader.read();
-            System.out.println("Loaded " + pomoTimer.getName() + " from " + JSON_STORE);
-//            EventLog.getInstance().logEvent(new model.Event("Loaded Pomodoro Timer"));
+//            System.out.println("Loaded " + pomoTimer.getName() + " from " + JSON_STORE);
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
+//            System.out.println("Unable to read from file: " + JSON_STORE);
         }
 
         return pomoTimer;

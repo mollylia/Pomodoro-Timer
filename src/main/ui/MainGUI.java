@@ -1,9 +1,7 @@
 package ui;
 
-import model.Event;
-import model.EventLog;
-import model.PomodoroTimer;
 import model.EventLogDisplay;
+import model.PomodoroTimer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,6 +57,8 @@ public class MainGUI extends JFrame {
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.INFORMATION_MESSAGE);
 
+        new EventLogDisplay().printLog();
+
         switch (result) {
             case JOptionPane.YES_OPTION:
                 if (savedFilePath == "") {
@@ -101,7 +101,9 @@ public class MainGUI extends JFrame {
         background.add(stopTimerButton);
         background.setLayout(new FlowLayout());
 
-        windowListener();
+        this.addWindowListener(new WindowHandler());
+
+//        windowListener();
 
 //        JPanel panel = new JPanel();
 //        panel.setLayout(new FlowLayout());
@@ -117,18 +119,31 @@ public class MainGUI extends JFrame {
 
 
     // EFFECTS: handles the close window box
-    private void windowListener() {
-        this.addWindowListener(new WindowAdapter() {
+    public class WindowHandler extends WindowAdapter {
+        public WindowHandler() {}
 
-            @Override
-            public void windowClosed(WindowEvent e) {
-                quit();
-                printLog();
-//                new EventLogDisplay().printLog();
+        public void windowClosed(WindowEvent e) {}
 
-            }
-        });
+        public void windowClosing(WindowEvent e) {
+            new EventLogDisplay().printLog();
+            quit();
+        }
     }
+
+
+//    private void windowListener() {
+//        this.addWindowListener(new WindowAdapter() {
+//
+//            @Override
+//            public void windowClosing(WindowEvent e) {
+//                new EventLogDisplay().printLog();
+//                quit();
+////                printLog();
+////                new EventLogDisplay().printLog();
+//
+//            }
+//        });
+//    }
 
     // EFFECTS: adds tabs to menu bars on the main panel, and adds shortcuts
     public JMenuBar createJMenuBar() {
@@ -173,12 +188,12 @@ public class MainGUI extends JFrame {
     }
 
 
-    // TODO CHANGE; CAN'T HAVE IN UI
-    private void printLog() {
-        for (Event event : EventLog.getInstance()) {
-            System.out.println(event.toString());
-        }
-    }
+//    // TODO CHANGE; CAN'T HAVE IN UI
+//    private void printLog() {
+//        for (Event event : EventLog.getInstance()) {
+//            System.out.println(event.toString());
+//        }
+//    }
 
 
     // Handles buttons on panel
@@ -207,7 +222,11 @@ public class MainGUI extends JFrame {
 //                save();
 
             } else if (e.getActionCommand().equals("Quit")) {
+//                pomoTimer.printLog(EventLog.getInstance());
+
                 quit();
+
+
 //                new EventLogDisplay().printLog();
 //                printLog();
 
@@ -272,7 +291,6 @@ public class MainGUI extends JFrame {
 
 //                EventLog.getInstance().logEvent(new Event("Timer started"));
 //                new EventLogDisplay().printLog();
-
 
 
 //                app = new PomodoroTimerApp(runningTime);

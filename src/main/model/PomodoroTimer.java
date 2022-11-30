@@ -34,6 +34,11 @@ public class PomodoroTimer implements Writable {
     // EFFECTS: adds a new pomodoro interval to the collection of intervals to be run
     public void addInterval(PomodoroInterval interval) {
         pomoIntervals.add(interval);
+        EventLog.getInstance().logEvent(new Event("Added interval: " + interval.getName()
+                + " (" + interval.getIntervalType() + ", " + interval.getDuration() + ")"));
+
+//        EventLog.getInstance().logEvent(new Event("Added interval: " + interval));
+
     }
 
     // REQUIRES: the list of intervals to not be empty

@@ -1,5 +1,7 @@
 package ui;
 
+import model.EventLog;
+import model.PomodoroDefault;
 import model.PomodoroInterval;
 import model.PomodoroTimer;
 
@@ -10,13 +12,15 @@ import java.awt.event.ActionListener;
 
 // Allows user to add intervals to timer
 public class AddIntervalFrame extends JFrame {
+    private PomodoroInterval interval;
     private PomodoroTimer pomoTimer;
     private PomodoroTimerApp app;
 
-    private JTextField textName;
-    private JTextField textInterval;
 
-    //  public AddIntervalFrame() {
+    private JTextField textName;
+//    private JTextField textInterval;
+    private JComboBox statusSelection;
+
     public AddIntervalFrame(PomodoroTimerApp app, PomodoroTimer timer) {
         this.app = app;
         pomoTimer = timer;
@@ -33,26 +37,27 @@ public class AddIntervalFrame extends JFrame {
         JLabel labelName = new JLabel("Name");
         textName = new JTextField("", 20);
 
-        JLabel labelInterval = new JLabel("Interval");
-        textInterval = new JTextField("", 20);
+        //JLabel labelInterval = new JLabel("Interval");
+        //textInterval = new JTextField("", 20);
 
+        String intervalStatus[] = {"short study", "long study", "short break", "long break"};
 
-        // NEWLY ADDED
-        String intervalStatus[] = {"study", "break"};
-        JComboBox statusSelection = new JComboBox(intervalStatus);
-
-        // TODO interval status listener
+        statusSelection = new JComboBox(intervalStatus);
+        statusSelection.setBounds(50, 50, 90, 20);
 
         ButtonKeyHandler addButton = new ButtonKeyHandler("Add");
 
         mainPanel.add(labelName);
         mainPanel.add(textName);
-        mainPanel.add(labelInterval);
-        mainPanel.add(textInterval);
-        mainPanel.add(addButton);
+//        mainPanel.add(labelInterval);
+        //mainPanel.add(textInterval);
         mainPanel.add(statusSelection);
+        mainPanel.add(addButton);
 
         add(mainPanel, BorderLayout.CENTER);
+
+//        String intervalStatus[] = {"short study", "long study", "custom study",
+//                "short break", "long break", "custom break"};
     }
 
 
@@ -65,22 +70,66 @@ public class AddIntervalFrame extends JFrame {
 //        private TimerTask timerInterval;
 //        private JLabel runningTime;
 
+        private int duration;
+        boolean intervalStatus = true;
+
         public ButtonKeyHandler(String text) {
             super(text);
             addActionListener(this);
         }
 
         public void actionPerformed(ActionEvent e) {
-            System.out.println(e.getSource());
+            //System.out.println(e.getSource());
+
 
             if (e.getActionCommand().equals("Add")) {
-                pomoTimer = app.loadPomodoroTimer();
-                PomodoroInterval interval = new PomodoroInterval(true, textName.getText(),
-                        Integer.parseInt(textInterval.getText()));
+                String statusType = statusSelection.getSelectedItem().toString();
 
-                pomoTimer.addInterval(interval);
-                app.savePomodoroTimer();
+
+                if ((statusType == "short break" || statusType == "long break")) {
+                    intervalStatus = false;
+                } else {
+                    intervalStatus = true;
+                }
+
+
+                if (statusType == "short study") {
+                    duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.SHORT_STUDY);
+//                    textInterval = new JTextField(String.valueOf(duration), 20);
+
+                } else if (statusType == "long study") {
+                    duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.LONG_STUDY);
+//                    textInterval = new JTextField(String.valueOf(duration), 20);
+
+                } else if (statusType == "short break") {
+                    duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.SHORT_BREAK);
+//                    textInterval = new JTextField(String.valueOf(duration), 20);
+
+                } else if (statusType == "long break") {
+                    duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.LONG_BREAK);
+//                    textInterval = new JTextField(String.valueOf(duration), 20);
+
+                }
+//                else {
+//                    PomodoroInterval interval = new PomodoroInterval(intervalStatus, textName.getText(),
+//                            Integer.parseInt(textInterval.getText()));
+//
+//                    pomoTimer.addInterval(interval);
             }
+
+
+            pomoTimer = app.loadPomodoroTimer();
+            interval = new PomodoroInterval(intervalStatus, textName.getText(), duration);
+//            interval = new PomodoroInterval(intervalStatus, textName.getText(),
+//                    Integer.parseInt(textInterval.getText()));
+//                PomodoroInterval interval = new PomodoroInterval(intervalStatus, textName.getText(),
+//                        Integer.parseInt(textInterval.getText()));
+
+            pomoTimer.addInterval(interval);
+            app.savePomodoroTimer();
+        }
+
+
 //            else if (e.getActionCommand().equals("Start")) {
 //                runningTime.setText("Timer running ");
 //                pomoTimer = app.loadPomodoroTimer();
@@ -91,8 +140,8 @@ public class AddIntervalFrame extends JFrame {
 //                runningTime.setText("Timer stopped");
 //                timer.cancel();
 //            }
-        }
     }
-
-
 }
+
+
+//}
