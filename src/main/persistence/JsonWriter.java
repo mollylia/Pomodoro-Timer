@@ -1,5 +1,7 @@
 package persistence;
 
+import model.Event;
+import model.EventLog;
 import model.PomodoroTimer;
 import org.json.JSONObject;
 
@@ -29,6 +31,8 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS: writes JSON representation of Pomodoro Timer to file
     public void write(PomodoroTimer pomoTimer) {
+        EventLog.getInstance().logEvent(new Event("Saved Pomodoro Timer"));
+
         JSONObject json = pomoTimer.toJson();
         saveToFile(json.toString(TAB));
     }

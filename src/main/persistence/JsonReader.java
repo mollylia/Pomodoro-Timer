@@ -1,5 +1,7 @@
 package persistence;
 
+import model.Event;
+import model.EventLog;
 import model.PomodoroInterval;
 import model.PomodoroTimer;
 
@@ -25,6 +27,8 @@ public class JsonReader {
     // EFFECTS: reads workroom from file and returns it;
     // throws IOException if an error occurs reading data from file
     public PomodoroTimer read() throws IOException {
+        EventLog.getInstance().logEvent(new Event("Loaded Pomodoro Timer"));
+
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parsePomodoroTimer(jsonObject);

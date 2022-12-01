@@ -10,6 +10,7 @@ public class ViewIntervalFrame extends JFrame {
     private PomodoroTimer pomoTimer;
     private PomodoroTimerApp app;
 
+    // EFFECTS: constructs the view interval frame
     public ViewIntervalFrame(PomodoroTimerApp timerApp) {
         super("Current Intervals");
 
@@ -19,6 +20,7 @@ public class ViewIntervalFrame extends JFrame {
         viewIntervals(panel);
     }
 
+    // EFFECTS: initializes view interval fram
     private void setupFrame(JPanel panel) {
         panel.setLayout(new FlowLayout());
 
@@ -29,6 +31,7 @@ public class ViewIntervalFrame extends JFrame {
         setVisible(true);
     }
 
+    // EFFECTS: displays all the intervals that have been added
     private void viewIntervals(JPanel panel) {
         pomoTimer = app.loadPomodoroTimer();
 
@@ -45,25 +48,3 @@ public class ViewIntervalFrame extends JFrame {
         add(panel, BorderLayout.CENTER);
     }
 }
-
-//        JFrame frame = new JFrame();
-//        JPanel panel = new JPanel();
-//        panel.setLayout(new FlowLayout());
-//
-//        setSize(400, 300);
-//        setLocationRelativeTo(null);
-//        setResizable(false);
-//        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-//        setVisible(true);
-
-//        pomoTimer = app.loadPomodoroTimer();
-//
-//        String output = "<html>";
-//        for (int i = 0; i < pomoTimer.length(); i++) {
-//            output += pomoTimer.getNextInterval().toString() + "<br>";
-//        }
-//        output += "</html>";
-//
-//        JLabel currentIntervalsText = new JLabel(output);
-//        panel.add(currentIntervalsText);
-//        add(panel, BorderLayout.CENTER);

@@ -96,12 +96,5 @@ public class PomodoroTimer implements Writable {
         }
         return jsonArray;
     }
-
-//    public void printLog() {
-//        for (Event event : EventLog.getInstance()) {
-//            System.out.println(event.toString());
-//        }
-//    }
-
 }
 

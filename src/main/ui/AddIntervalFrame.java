@@ -18,7 +18,6 @@ public class AddIntervalFrame extends JFrame {
 
 
     private JTextField textName;
-//    private JTextField textInterval;
     private JComboBox statusSelection;
 
     public AddIntervalFrame(PomodoroTimerApp app, PomodoroTimer timer) {
@@ -49,42 +48,28 @@ public class AddIntervalFrame extends JFrame {
 
         mainPanel.add(labelName);
         mainPanel.add(textName);
-//        mainPanel.add(labelInterval);
-        //mainPanel.add(textInterval);
         mainPanel.add(statusSelection);
         mainPanel.add(addButton);
 
         add(mainPanel, BorderLayout.CENTER);
-
-//        String intervalStatus[] = {"short study", "long study", "custom study",
-//                "short break", "long break", "custom break"};
     }
 
 
     // Handles keys related to adding intervals
     public class ButtonKeyHandler extends JButton implements ActionListener {
-//        PomodoroTimer pomoTimer;
-//        PomodoroTimerApp app;
-
-//        private java.util.Timer timer;
-//        private TimerTask timerInterval;
-//        private JLabel runningTime;
-
         private int duration;
         boolean intervalStatus = true;
 
+        // EFFECTS: handles the buttons on the main panel
         public ButtonKeyHandler(String text) {
             super(text);
             addActionListener(this);
         }
 
+        // EFFECTS: button listener for main panel
         public void actionPerformed(ActionEvent e) {
-            //System.out.println(e.getSource());
-
-
             if (e.getActionCommand().equals("Add")) {
                 String statusType = statusSelection.getSelectedItem().toString();
-
 
                 if ((statusType == "short break" || statusType == "long break")) {
                     intervalStatus = false;
@@ -92,56 +77,22 @@ public class AddIntervalFrame extends JFrame {
                     intervalStatus = true;
                 }
 
-
                 if (statusType == "short study") {
                     duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.SHORT_STUDY);
-//                    textInterval = new JTextField(String.valueOf(duration), 20);
-
                 } else if (statusType == "long study") {
                     duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.LONG_STUDY);
-//                    textInterval = new JTextField(String.valueOf(duration), 20);
-
                 } else if (statusType == "short break") {
                     duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.SHORT_BREAK);
-//                    textInterval = new JTextField(String.valueOf(duration), 20);
-
                 } else if (statusType == "long break") {
                     duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.LONG_BREAK);
-//                    textInterval = new JTextField(String.valueOf(duration), 20);
-
                 }
-//                else {
-//                    PomodoroInterval interval = new PomodoroInterval(intervalStatus, textName.getText(),
-//                            Integer.parseInt(textInterval.getText()));
-//
-//                    pomoTimer.addInterval(interval);
             }
-
 
             pomoTimer = app.loadPomodoroTimer();
             interval = new PomodoroInterval(intervalStatus, textName.getText(), duration);
-//            interval = new PomodoroInterval(intervalStatus, textName.getText(),
-//                    Integer.parseInt(textInterval.getText()));
-//                PomodoroInterval interval = new PomodoroInterval(intervalStatus, textName.getText(),
-//                        Integer.parseInt(textInterval.getText()));
-
             pomoTimer.addInterval(interval);
             app.savePomodoroTimer();
         }
-
-
-//            else if (e.getActionCommand().equals("Start")) {
-//                runningTime.setText("Timer running ");
-//                pomoTimer = app.loadPomodoroTimer();
-//                timer = new Timer();
-//                timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, runningTime);
-//                timer.schedule(timerInterval, 0, 1000);
-//            } else if (e.getActionCommand().equals("Stop")) {
-//                runningTime.setText("Timer stopped");
-//                timer.cancel();
-//            }
     }
 }
 
-
-//}

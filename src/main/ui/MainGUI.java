@@ -2,7 +2,6 @@ package ui;
 
 import model.Event;
 import model.EventLog;
-import model.EventLogDisplay;
 import model.PomodoroTimer;
 
 import javax.swing.*;
@@ -14,6 +13,7 @@ import java.awt.event.WindowEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
 // Represents GUI for the Pomodoro timer
 public class MainGUI extends JFrame {
     private String savedFilePath = "./data/pomodorotimer.json";
@@ -23,10 +23,6 @@ public class MainGUI extends JFrame {
     private java.util.Timer timer;
     private TimerTask timerInterval;
     private JLabel runningTime;
-
-    private JTextField textName;
-    private JTextField textInterval;
-    private JLabel displayedTime;
 
 
     // EFFECTS: constructs the main panel
@@ -51,6 +47,14 @@ public class MainGUI extends JFrame {
         app.savePomodoroTimer();
     }
 
+    // TODO: can I have it in ui?
+    // EFFECTS: prints the log to consol
+    private void printLog(EventLog eventLog) {
+        for (Event event : eventLog) {
+            System.out.println(event.toString());
+        }
+    }
+
     // EFFECTS: quits the main panel
     public void quit() {
         printLog(EventLog.getInstance());
@@ -60,9 +64,6 @@ public class MainGUI extends JFrame {
                 "Confirmation",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.INFORMATION_MESSAGE);
-
-//        printLog(EventLog.getInstance());
-//        new EventLogDisplay().printLog();
 
         switch (result) {
             case JOptionPane.YES_OPTION:
@@ -107,19 +108,6 @@ public class MainGUI extends JFrame {
         background.setLayout(new FlowLayout());
 
         this.addWindowListener(new WindowHandler());
-
-//        windowListener();
-
-//        JPanel panel = new JPanel();
-//        panel.setLayout(new FlowLayout());
-//        runningTime = new JLabel("Run Time");
-//        JButton startTimerButton = new JButton("Start");
-//        startTimerButton.addActionListener(new ButtonKeyHandler("Start"));
-//        JButton stopTimerButton = new JButton("Stop");
-//        stopTimerButton.addActionListener(new ButtonKeyHandler("Stop"));
-//        timer = new Timer();
-//        timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, runningTime);
-//        timer.schedule(timerInterval, 0, 1000);
     }
 
 
@@ -130,26 +118,9 @@ public class MainGUI extends JFrame {
         public void windowClosed(WindowEvent e) {}
 
         public void windowClosing(WindowEvent e) {
-//            printLog(EventLog.getInstance());
-//            new EventLogDisplay().printLog();
             quit();
         }
     }
-
-
-//    private void windowListener() {
-//        this.addWindowListener(new WindowAdapter() {
-//
-//            @Override
-//            public void windowClosing(WindowEvent e) {
-//                new EventLogDisplay().printLog();
-//                quit();
-////                printLog();
-////                new EventLogDisplay().printLog();
-//
-//            }
-//        });
-//    }
 
     // EFFECTS: adds tabs to menu bars on the main panel, and adds shortcuts
     public JMenuBar createJMenuBar() {
@@ -194,17 +165,6 @@ public class MainGUI extends JFrame {
     }
 
 
-    // TODO: can I have it in ui?
-    private void printLog(EventLog eventLog) {
-        for (Event event : eventLog) {
-            System.out.println(event.toString());
-        }
-    }
-
-
-
-
-
     // Handles buttons on panel
     private class MenuKeyHandler implements ActionListener {
         public MenuKeyHandler() {
@@ -213,34 +173,16 @@ public class MainGUI extends JFrame {
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("New Timer")) {
                 reset();
-
             } else if (e.getActionCommand().equals("Load Timer")) {
                 load();
-
             } else if (e.getActionCommand().equals("Save Timer")) {
                 save();
-
             } else if (e.getActionCommand().equals("Add Interval")) {
                 new AddIntervalFrame(app, pomoTimer);
-//                new AddIntervalFrame(textName, textInterval);
-//                new AddIntervalFrame();
-
             } else if (e.getActionCommand().equals("View Intervals")) {
                 new ViewIntervalFrame(app);
-//                new ViewIntervalDisplay();
-//                save();
-
             } else if (e.getActionCommand().equals("Quit")) {
-//                pomoTimer.printLog(EventLog.getInstance());
-
                 quit();
-
-
-//                new EventLogDisplay().printLog();
-//                printLog();
-
-            } else {
-                System.out.println("Coming soon");
             }
         }
     }
@@ -253,17 +195,13 @@ public class MainGUI extends JFrame {
         timer = new Timer();
         timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, runningTime);
         timer.schedule(timerInterval, 0, 1000);
-
-//        pomoTimer = app.loadPomodoroTimer();
-//        timer = new Timer();
-//        timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, runningTime);
-//        timer.schedule(timerInterval, 0, 1000);
     }
 
-    // EFFECTS: pauses the pomodoro timer
-    public void pause() {
+    // EFFECTS: stops the pomodoro timer
+    public void stop() {
         timer.cancel();
     }
+
 
     // Handles main panel buttons
     private class MainPanelKeyHandler extends JButton implements ActionListener {
@@ -275,131 +213,12 @@ public class MainGUI extends JFrame {
         // EFFECTS: handles the buttons on the main panel
         public void actionPerformed(ActionEvent e) {
             System.out.println(e.getSource());
-//
-//            if (e.getActionCommand().equals("Start")) {
-//                start();
-//                setText("Pause");
-//            } else if (e.getActionCommand().equals("Pause")) {
-//                pause();
-//                setText("Resume");
-//            } else {
-//                start();
-//                setText("Pause");
-//            }
-
-//            if (e.getActionCommand().equals("Add")) {
-//                pomoTimer = app.loadPomodoroTimer();
-//                PomodoroInterval interval = new PomodoroInterval(true, textName.getText(),
-//                        Integer.parseInt(textInterval.getText()));
-//
-//                pomoTimer.addInterval(interval);
-//            }
 
             if (e.getActionCommand().equals("Start")) {
                 start();
-
-//                EventLog.getInstance().logEvent(new Event("Timer started"));
-//                new EventLogDisplay().printLog();
-
-
-//                app = new PomodoroTimerApp(runningTime);
-//                pomoTimer = app.loadPomodoroTimer();
-//
-//                pomoTimer = app.loadPomodoroTimer();
-//                timer = new Timer();
-//                timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, runningTime);
-//                timer.schedule(timerInterval, 0, 1000);
-
-
-//                if (timer != null) {
-//                    timer.cancel();
-//                    timer.purge();
-//                }
-//
-//                timer = new java.util.Timer();
-//                timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, runningTime);
-//                timer.schedule(timerInterval, 0, 1000);
-
-
-//                runningTime.setText("Timer running ");
-
             } else if (e.getActionCommand().equals("Stop")) {
-                pause();
-
-//                EventLog.getInstance().logEvent(new Event("Timer stopped"));
-
-//                timer.cancel();
-
-//                if (timer != null) {
-//                    timer.cancel();
-//                    timer.purge();
-//                }
-
-//                runningTime.setText("Timer stopped");
-
+                stop();
             }
         }
     }
-
-
-//    // Allows user to add intervals to timer
-//    private class AddIntervalFrame extends JFrame {
-//        public AddIntervalFrame() {
-//            JPanel mainPanel = new JPanel();
-//            mainPanel.setLayout(new FlowLayout());
-//
-//            setSize(400, 300);
-//            setLocationRelativeTo(null);
-//            setResizable(false);
-//            setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-//            setVisible(true);
-//
-//            JLabel labelName = new JLabel("Name");
-//            textName = new JTextField("", 20);
-//
-//            JLabel labelInterval = new JLabel("Interval");
-//            textInterval = new JTextField("", 20);
-//
-//            ButtonKeyHandler addButton = new ButtonKeyHandler("Add");
-//
-//            mainPanel.add(labelName);
-//            mainPanel.add(textName);
-//            mainPanel.add(labelInterval);
-//            mainPanel.add(textInterval);
-//            mainPanel.add(addButton);
-//
-//            add(mainPanel, BorderLayout.CENTER);
-//        }
-//}
-
-
-//    // Displays all the intervals in the timer
-//    private class ViewIntervalDisplay extends JFrame {
-//        public ViewIntervalDisplay() {
-//            super("Current Intervals");
-//
-//            JFrame frame = new JFrame();
-//            JPanel panel = new JPanel();
-//            panel.setLayout(new FlowLayout());
-//
-//            setSize(400, 300);
-//            setLocationRelativeTo(null);
-//            setResizable(false);
-////            setResizable(true);
-//            setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-//            setVisible(true);
-//
-//            pomoTimer = app.loadPomodoroTimer();
-//
-//            String output = "<html>";
-//            for (int i = 0; i < pomoTimer.length(); i++) {
-//                output += pomoTimer.getNextInterval().toString() + "<br>";
-//            }
-//            output += "</html>";
-//
-//            JLabel currentIntervalsText = new JLabel(output);
-//            panel.add(currentIntervalsText);
-//            add(panel, BorderLayout.CENTER);
-//        }
-//    }
 }
