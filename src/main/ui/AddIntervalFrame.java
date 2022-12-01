@@ -35,7 +35,8 @@ public class AddIntervalFrame extends JFrame {
         JLabel labelName = new JLabel("Name");
         textName = new JTextField("", 20);
 
-        String intervalStatus[] = {"short study", "long study", "short break", "long break"};
+
+        String[] intervalStatus = {"short study", "long study", "short break", "long break"};
 
         statusSelection = new JComboBox(intervalStatus);
         statusSelection.setBounds(50, 50, 90, 20);

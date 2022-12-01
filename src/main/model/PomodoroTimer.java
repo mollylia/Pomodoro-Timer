@@ -3,6 +3,7 @@ package model;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
+import ui.PomodoroTimerApp;
 
 import java.util.*;
 
@@ -11,6 +12,10 @@ public class PomodoroTimer implements Writable {
     private String name;
     private List<PomodoroInterval> pomoIntervals;
     private int indexCount;
+
+    private PomodoroTimer pomoTimer;
+    private PomodoroTimerApp app;
+    private Timer timer;
 
     // EFFECTS: constructs an empty collection of intervals to run
     public PomodoroTimer() {
@@ -60,6 +65,21 @@ public class PomodoroTimer implements Writable {
             return false;
         }
     }
+
+    // EFFECTS: starts the pomodoro timer
+    public void start(Timer timer, TimerTask timerInterval) {
+        this.timer = timer;
+        this.timer = new Timer();
+        this.timer.schedule(timerInterval, 0, 1000);
+        EventLog.getInstance().logEvent(new Event("Started Pomodoro Timer"));
+    }
+
+    // EFFECTS: stops the pomodoro timer
+    public void stop() {
+        timer.cancel();
+        EventLog.getInstance().logEvent(new Event("Stopped Pomodoro Timer"));
+    }
+
 
     // EFFECTS: returns the number of intervals in the collection to be run, getter
     public int length() {

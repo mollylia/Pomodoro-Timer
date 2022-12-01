@@ -20,7 +20,7 @@ public class MainGUI extends JFrame {
     private PomodoroTimer pomoTimer;
     private PomodoroTimerApp app;
 
-    private java.util.Timer timer;
+    private Timer timer;
     private TimerTask timerInterval;
     private JLabel runningTime;
 
@@ -199,14 +199,23 @@ public class MainGUI extends JFrame {
         app = new PomodoroTimerApp(runningTime);
         pomoTimer = app.loadPomodoroTimer();
 
-        timer = new Timer();
         timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, runningTime);
-        timer.schedule(timerInterval, 0, 1000);
+        pomoTimer.start(timer, timerInterval);
+
+
+//        MOVED to PomodoroTimer
+//        timer = new Timer();
+//        timer.schedule(timerInterval, 0, 1000);
+
+//        timer = new Timer();
+//        timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, runningTime);
+//        timer.schedule(timerInterval, 0, 1000);
     }
 
     // EFFECTS: stops the pomodoro timer
     public void stop() {
-        timer.cancel();
+        pomoTimer.stop();
+//        timer.cancel();
     }
 
 
@@ -221,8 +230,6 @@ public class MainGUI extends JFrame {
 
         // EFFECTS: main panel button listeners
         public void actionPerformed(ActionEvent e) {
-//            System.out.println(e.getSource());
-
             if (e.getActionCommand().equals("Start")) {
                 start();
             } else if (e.getActionCommand().equals("Stop")) {
