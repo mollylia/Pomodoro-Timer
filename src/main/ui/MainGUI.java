@@ -116,7 +116,6 @@ public class MainGUI extends JFrame {
         }
     }
 
-    // TODO: can I have it in ui?
     // EFFECTS: prints the log to console
     private void printLog(EventLog eventLog) {
         for (Event event : eventLog) {
