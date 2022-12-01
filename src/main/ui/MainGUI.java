@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.EventLogDisplay;
 import model.PomodoroTimer;
 
@@ -51,13 +53,16 @@ public class MainGUI extends JFrame {
 
     // EFFECTS: quits the main panel
     public void quit() {
+        printLog(EventLog.getInstance());
+
         int result = JOptionPane.showConfirmDialog(null,
                 "Would you like to save the timer?",
                 "Confirmation",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.INFORMATION_MESSAGE);
 
-        new EventLogDisplay().printLog();
+//        printLog(EventLog.getInstance());
+//        new EventLogDisplay().printLog();
 
         switch (result) {
             case JOptionPane.YES_OPTION:
@@ -125,7 +130,8 @@ public class MainGUI extends JFrame {
         public void windowClosed(WindowEvent e) {}
 
         public void windowClosing(WindowEvent e) {
-            new EventLogDisplay().printLog();
+//            printLog(EventLog.getInstance());
+//            new EventLogDisplay().printLog();
             quit();
         }
     }
@@ -188,12 +194,15 @@ public class MainGUI extends JFrame {
     }
 
 
-//    // TODO CHANGE; CAN'T HAVE IN UI
-//    private void printLog() {
-//        for (Event event : EventLog.getInstance()) {
-//            System.out.println(event.toString());
-//        }
-//    }
+    // TODO: can I have it in ui?
+    private void printLog(EventLog eventLog) {
+        for (Event event : eventLog) {
+            System.out.println(event.toString());
+        }
+    }
+
+
+
 
 
     // Handles buttons on panel

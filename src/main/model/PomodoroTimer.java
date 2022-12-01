@@ -35,10 +35,7 @@ public class PomodoroTimer implements Writable {
     public void addInterval(PomodoroInterval interval) {
         pomoIntervals.add(interval);
         EventLog.getInstance().logEvent(new Event("Added interval: " + interval.getName()
-                + " (" + interval.getIntervalType() + ", " + interval.getDuration() + ")"));
-
-//        EventLog.getInstance().logEvent(new Event("Added interval: " + interval));
-
+                + " (" + interval.getIntervalType() + ", " + interval.getDuration() + " seconds)"));
     }
 
     // REQUIRES: the list of intervals to not be empty
@@ -99,5 +96,12 @@ public class PomodoroTimer implements Writable {
         }
         return jsonArray;
     }
+
+//    public void printLog() {
+//        for (Event event : EventLog.getInstance()) {
+//            System.out.println(event.toString());
+//        }
+//    }
+
 }
 
