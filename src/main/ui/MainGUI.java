@@ -25,65 +25,13 @@ public class MainGUI extends JFrame {
     private JLabel runningTime;
 
 
-    // EFFECTS: constructs the main panel
+    // EFFECTS: constructs main panel
     public MainGUI() {
         app = new PomodoroTimerApp();
         initializePanel();
     }
 
-    // EFFECTS: saves the current Pomodoro timer to file
-    private void save() {
-        app.savePomodoroTimer();
-    }
-
-    // EFFECTS: loads saved Pomodoro timer file on computer
-    private void load() {
-        pomoTimer = app.loadPomodoroTimer();
-    }
-
-    // EFFECTS: clears the saved file and creates a new Pomodoro Timer app
-    private void reset() {
-        app = new PomodoroTimerApp();
-        app.savePomodoroTimer();
-    }
-
-    // TODO: can I have it in ui?
-    // EFFECTS: prints the log to consol
-    private void printLog(EventLog eventLog) {
-        for (Event event : eventLog) {
-            System.out.println(event.toString());
-        }
-    }
-
-    // EFFECTS: quits the main panel
-    public void quit() {
-        printLog(EventLog.getInstance());
-
-        int result = JOptionPane.showConfirmDialog(null,
-                "Would you like to save the timer?",
-                "Confirmation",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.INFORMATION_MESSAGE);
-
-        switch (result) {
-            case JOptionPane.YES_OPTION:
-                if (savedFilePath == "") {
-                    savedFilePath = "./data/pomodorotimer.json";
-                }
-
-                app.savePomodoroTimer();
-
-                JOptionPane.showMessageDialog(null, "The timer has been successfully saved");
-                System.exit(0);
-                break;
-
-            case JOptionPane.NO_OPTION:
-                System.exit(0);
-                break;
-        }
-    }
-
-    // EFFECTS: initializes the main panel
+    // EFFECTS: initializes main panel
     private void initializePanel() {
         ImageIcon backgroundImage = new ImageIcon("./data/background.jpg");
         JLabel background = new JLabel(backgroundImage);
@@ -110,17 +58,73 @@ public class MainGUI extends JFrame {
         this.addWindowListener(new WindowHandler());
     }
 
+    // EFFECTS: saves the current Pomodoro timer to file
+    private void save() {
+        app.savePomodoroTimer();
+    }
+
+    // EFFECTS: loads saved Pomodoro timer file on computer
+    private void load() {
+        pomoTimer = app.loadPomodoroTimer();
+    }
+
+    // EFFECTS: clears the saved file and creates a new Pomodoro Timer app
+    private void reset() {
+        app = new PomodoroTimerApp();
+        app.savePomodoroTimer();
+    }
+
+    // EFFECTS: quits the main panel
+    public void quit() {
+//        printLog(EventLog.getInstance());
+
+        int result = JOptionPane.showConfirmDialog(null,
+                "Would you like to save the timer?",
+                "Confirmation",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE);
+
+        switch (result) {
+            case JOptionPane.YES_OPTION:
+                if (savedFilePath == "") {
+                    savedFilePath = "./data/pomodorotimer.json";
+                }
+
+                app.savePomodoroTimer();
+                printLog(EventLog.getInstance());
+
+                JOptionPane.showMessageDialog(null, "The timer has been successfully saved");
+                System.exit(0);
+                break;
+
+            case JOptionPane.NO_OPTION:
+                printLog(EventLog.getInstance());
+                System.exit(0);
+                break;
+        }
+    }
 
     // EFFECTS: handles the close window box
     public class WindowHandler extends WindowAdapter {
+
+        // EFFECTS: constructs window handler
         public WindowHandler() {}
 
-        public void windowClosed(WindowEvent e) {}
-
+        // EFFECTS: handles close window button
         public void windowClosing(WindowEvent e) {
             quit();
         }
     }
+
+    // TODO: can I have it in ui?
+    // EFFECTS: prints the log to console
+    private void printLog(EventLog eventLog) {
+        for (Event event : eventLog) {
+            System.out.println(event.toString());
+        }
+    }
+
+
 
     // EFFECTS: adds tabs to menu bars on the main panel, and adds shortcuts
     public JMenuBar createJMenuBar() {
@@ -164,12 +168,14 @@ public class MainGUI extends JFrame {
         menu.add(menuItem);
     }
 
-
     // Handles buttons on panel
     private class MenuKeyHandler implements ActionListener {
+
+        // EFFECTS: constructs menu handler
         public MenuKeyHandler() {
         }
 
+        // EFFECTS: menu button listeners
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("New Timer")) {
                 reset();
@@ -186,6 +192,8 @@ public class MainGUI extends JFrame {
             }
         }
     }
+
+
 
     // EFFECTS: starts the pomodoro timer
     public void start() {
@@ -205,14 +213,16 @@ public class MainGUI extends JFrame {
 
     // Handles main panel buttons
     private class MainPanelKeyHandler extends JButton implements ActionListener {
+
+        // EFFECTS: constructs new panel handler
         public MainPanelKeyHandler(String text) {
             super(text);
             addActionListener(this);
         }
 
-        // EFFECTS: handles the buttons on the main panel
+        // EFFECTS: main panel button listeners
         public void actionPerformed(ActionEvent e) {
-            System.out.println(e.getSource());
+//            System.out.println(e.getSource());
 
             if (e.getActionCommand().equals("Start")) {
                 start();

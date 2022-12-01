@@ -1,6 +1,5 @@
 package ui;
 
-import model.EventLog;
 import model.PomodoroDefault;
 import model.PomodoroInterval;
 import model.PomodoroTimer;
@@ -35,9 +34,6 @@ public class AddIntervalFrame extends JFrame {
 
         JLabel labelName = new JLabel("Name");
         textName = new JTextField("", 20);
-
-        //JLabel labelInterval = new JLabel("Interval");
-        //textInterval = new JTextField("", 20);
 
         String intervalStatus[] = {"short study", "long study", "short break", "long break"};
 

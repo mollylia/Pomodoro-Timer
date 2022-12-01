@@ -32,3 +32,11 @@ in the menu bar and then selecting *Add Interval*. This can also be done by usin
 or by using the shortcut: CTRL + S.
 - You can reload the state of my application by clicking on the *File* tab in the menu bar and then selecting *Load
 Timer* or by using the shortcut: CTRL + L.
+
+### Phase 4: Task 2
+Wed Nov 30 22:21:52 PST 2022
+Loaded Pomodoro Timer
+Wed Nov 30 22:21:52 PST 2022
+Added interval: 210 project (study, 3000 seconds)
+Wed Nov 30 22:21:52 PST 2022
+Saved Pomodoro Timer

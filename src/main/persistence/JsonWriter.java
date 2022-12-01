@@ -37,14 +37,6 @@ public class JsonWriter {
         saveToFile(json.toString(TAB));
     }
 
-    // EFFECTS: writes JSON file as string
-    public String writeToString(PomodoroTimer pomoTimer) {
-        String output = "";
-        JSONObject json = pomoTimer.toJson();
-        output = json.toString(TAB);
-        return output;
-    }
-
     // MODIFIES: this
     // EFFECTS: closes writer
     public void close() {

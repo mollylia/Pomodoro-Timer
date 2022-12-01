@@ -24,7 +24,7 @@ public class PomodoroTimerApp {
     private JsonReader jsonReader;
     private JLabel timerDisplay;
 
-    // EFFECTS: constructs Pomodoro timer and runs application
+    // EFFECTS: constructs Pomodoro timer
     public PomodoroTimerApp() {
         pomoTimer = new PomodoroTimer("My Pomodoro Timer");
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -33,7 +33,7 @@ public class PomodoroTimerApp {
 //        runPomodoroApp();
     }
 
-
+    // EFFECTS: constructs Pomodoro timer with current run time
     public PomodoroTimerApp(JLabel runTime) {
         pomoTimer = new PomodoroTimer("My Pomodoro Timer");
         jsonWriter = new JsonWriter(JSON_STORE);
