@@ -19,6 +19,7 @@ public class AddIntervalFrame extends JFrame {
     private JTextField textName;
     private JComboBox statusSelection;
 
+    // EFFECTS: constructs add interval frame with given app and timer
     public AddIntervalFrame(PomodoroTimerApp app, PomodoroTimer timer) {
         this.app = app;
         pomoTimer = timer;
@@ -63,7 +64,7 @@ public class AddIntervalFrame extends JFrame {
             addActionListener(this);
         }
 
-        // EFFECTS: button listener for main panel
+        // EFFECTS: button listener for panel, adds timer interval to Pomodoro timer
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Add")) {
                 String statusType = statusSelection.getSelectedItem().toString();

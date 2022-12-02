@@ -34,9 +34,21 @@ or by using the shortcut: CTRL + S.
 Timer* or by using the shortcut: CTRL + L.
 
 ### Phase 4: Task 2
-Wed Nov 30 22:21:52 PST 2022
+Fri Dec 02 10:01:15 PST 2022
 Loaded Pomodoro Timer
-Wed Nov 30 22:21:52 PST 2022
-Added interval: 210 project (study, 3000 seconds)
-Wed Nov 30 22:21:52 PST 2022
+Fri Dec 02 10:01:15 PST 2022
+Added interval: project (study, 3000 seconds)
+Fri Dec 02 10:01:15 PST 2022
 Saved Pomodoro Timer
+Fri Dec 02 10:01:22 PST 2022
+Loaded Pomodoro Timer
+Fri Dec 02 10:01:22 PST 2022
+Added interval: project (study, 3000 seconds)
+Fri Dec 02 10:01:22 PST 2022
+Started Pomodoro Timer
+Fri Dec 02 10:01:35 PST 2022
+Stopped Pomodoro Timer
+Fri Dec 02 10:01:38 PST 2022
+Saved Pomodoro Timer
+
+- added an interval called *project*, started the timer, stopped the timer, and chose to save timer when I quit.
