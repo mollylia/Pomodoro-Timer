@@ -10,7 +10,7 @@ import java.util.*;
 // Represents the list of Pomodoro intervals to run
 public class PomodoroTimer implements Writable {
     private String name;
-    private Boolean started;
+    private boolean started;
     private List<PomodoroInterval> pomoIntervals;
     private int indexCount;
 
@@ -75,6 +75,7 @@ public class PomodoroTimer implements Writable {
         EventLog.getInstance().logEvent(new Event("Started Pomodoro Timer"));
     }
 
+    // MODIFIES: timer
     // EFFECTS: stops the pomodoro timer and logs the event
     public void stop() {
         started = false;
@@ -82,6 +83,7 @@ public class PomodoroTimer implements Writable {
         EventLog.getInstance().logEvent(new Event("Stopped Pomodoro Timer"));
     }
 
+    // EFFECTS: checks if the timer has been started
     public Boolean hasStarted() {
         return started;
     }
