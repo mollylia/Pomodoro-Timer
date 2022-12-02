@@ -13,8 +13,6 @@ public class PomodoroTimer implements Writable {
     private List<PomodoroInterval> pomoIntervals;
     private int indexCount;
 
-    private PomodoroTimer pomoTimer;
-    private PomodoroTimerApp app;
     private Timer timer;
 
     // EFFECTS: constructs an empty collection of intervals to run

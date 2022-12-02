@@ -74,7 +74,7 @@ public class MainGUI extends JFrame {
         app.savePomodoroTimer();
     }
 
-    // EFFECTS: quits the main panel
+    // EFFECTS: quits the main panel and asks user if they want to save the timer
     public void quit() {
 
         int result = JOptionPane.showConfirmDialog(null,

@@ -15,9 +15,9 @@ public class AddIntervalFrame extends JFrame {
     private PomodoroTimer pomoTimer;
     private PomodoroTimerApp app;
 
-
     private JTextField textName;
     private JComboBox statusSelection;
+
 
     // EFFECTS: constructs add interval frame with given app and timer
     public AddIntervalFrame(PomodoroTimerApp app, PomodoroTimer timer) {
@@ -56,12 +56,14 @@ public class AddIntervalFrame extends JFrame {
     // Handles keys related to adding intervals
     public class ButtonKeyHandler extends JButton implements ActionListener {
         private int duration;
-        boolean intervalStatus = true;
+        private boolean intervalStatus;
 
         // EFFECTS: handles the buttons on the main panel
         public ButtonKeyHandler(String text) {
             super(text);
             addActionListener(this);
+
+            intervalStatus = true;
         }
 
         // EFFECTS: button listener for panel, adds timer interval to Pomodoro timer
