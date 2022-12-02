@@ -10,6 +10,7 @@ import java.util.*;
 // Represents the list of Pomodoro intervals to run
 public class PomodoroTimer implements Writable {
     private String name;
+    private Boolean started;
     private List<PomodoroInterval> pomoIntervals;
     private int indexCount;
 
@@ -18,6 +19,7 @@ public class PomodoroTimer implements Writable {
     // EFFECTS: constructs an empty collection of intervals to run
     public PomodoroTimer() {
         pomoIntervals = new ArrayList<>();
+        started = false;
         indexCount = 0;
     }
 
@@ -64,25 +66,31 @@ public class PomodoroTimer implements Writable {
         }
     }
 
-    // EFFECTS: starts the pomodoro timer
+    // EFFECTS: starts the pomodoro timer and logs the event
     public void start(Timer timer, TimerTask timerInterval) {
+        started = true;
         this.timer = timer;
         this.timer = new Timer();
         this.timer.schedule(timerInterval, 0, 1000);
         EventLog.getInstance().logEvent(new Event("Started Pomodoro Timer"));
     }
 
-    // EFFECTS: stops the pomodoro timer
+    // EFFECTS: stops the pomodoro timer and logs the event
     public void stop() {
+        started = false;
         timer.cancel();
         EventLog.getInstance().logEvent(new Event("Stopped Pomodoro Timer"));
     }
 
+    public Boolean hasStarted() {
+        return started;
+    }
 
     // EFFECTS: returns the number of intervals in the collection to be run, getter
     public int length() {
         return pomoIntervals.size();
     }
+
 
     // Method was based on WorkRoom.getThingies() in:
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git

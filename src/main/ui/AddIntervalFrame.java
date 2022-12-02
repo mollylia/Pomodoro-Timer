@@ -66,7 +66,7 @@ public class AddIntervalFrame extends JFrame {
             intervalStatus = true;
         }
 
-        // EFFECTS: button listener for panel, adds timer interval to Pomodoro timer
+        // EFFECTS: button listener for panel, loads saved Pomodoro timer before adding new timer interval
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Add")) {
                 String statusType = statusSelection.getSelectedItem().toString();

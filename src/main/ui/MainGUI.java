@@ -109,7 +109,6 @@ public class MainGUI extends JFrame {
         // EFFECTS: constructs window handler
         public WindowHandler() {}
 
-        @Override
         // EFFECTS: handles close window button
         public void windowClosing(WindowEvent e) {
             quit();

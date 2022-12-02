@@ -20,7 +20,7 @@ public class ViewIntervalFrame extends JFrame {
         viewIntervals(panel);
     }
 
-    // EFFECTS: initializes view interval fram
+    // EFFECTS: initializes view interval frame
     private void setupFrame(JPanel panel) {
         panel.setLayout(new FlowLayout());
 

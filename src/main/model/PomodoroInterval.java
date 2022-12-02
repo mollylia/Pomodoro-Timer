@@ -3,7 +3,6 @@ package model;
 import org.json.JSONObject;
 import persistence.Writable;
 
-import java.nio.file.Watchable;
 
 // Represents an interval with a status, name, and duration
 public class PomodoroInterval implements Writable {
@@ -11,7 +10,7 @@ public class PomodoroInterval implements Writable {
     private String name;             // the name of the interval reminding the user of the task to work on
     private int duration;            // the duration of the time interval in seconds
 
-    // REQUIRES: duration >= 0
+
     // EFFECTS: constructs a pomodoro interval with the given name, time interval, and status.
     //          the status is true if the duration is for studying and false if it is for taking a break
     public PomodoroInterval(Boolean status, String name, int duration) {

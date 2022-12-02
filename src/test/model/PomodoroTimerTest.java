@@ -3,14 +3,34 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PomodoroTimerTest {
     private PomodoroTimer pomoTimer;
 
+    private Event startEvent, stopEvent;
+    private Timer timer;
+    private TimerTask task;
+
+
     @BeforeEach
     public void setup() {
         pomoTimer = new PomodoroTimer();
+
+
+        timer = new Timer();
+        task = new TimerTask() {
+            @Override
+            public void run() {
+
+            }
+        };
+
+        startEvent = new Event("Started Pomodoro Timer");
+        stopEvent = new Event("Stopped Pomodoro Timer");
     }
 
     @Test
@@ -101,6 +121,26 @@ public class PomodoroTimerTest {
         assertEquals(study1, pomoTimer.getNextInterval());
         assertEquals(break1, pomoTimer.getNextInterval());
         assertEquals(null, pomoTimer.getNextInterval());
+    }
+
+
+    @Test
+    public void testStartTimer() {
+        assertFalse(pomoTimer.hasStarted());
+        pomoTimer.start(timer, task);
+        assertTrue(pomoTimer.hasStarted());
+        assertEquals("Started Pomodoro Timer", startEvent.getDescription());
+    }
+
+    @Test
+    public void testStopTimer() {
+        assertFalse(pomoTimer.hasStarted());
+        pomoTimer.start(timer, task);
+        assertTrue(pomoTimer.hasStarted());
+
+        pomoTimer.stop();
+        assertFalse(pomoTimer.hasStarted());
+        assertEquals("Stopped Pomodoro Timer", stopEvent.getDescription());
     }
 }
 
