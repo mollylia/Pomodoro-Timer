@@ -76,7 +76,6 @@ public class MainGUI extends JFrame {
 
     // EFFECTS: quits the main panel
     public void quit() {
-//        printLog(EventLog.getInstance());
 
         int result = JOptionPane.showConfirmDialog(null,
                 "Would you like to save the timer?",
@@ -110,6 +109,7 @@ public class MainGUI extends JFrame {
         // EFFECTS: constructs window handler
         public WindowHandler() {}
 
+        @Override
         // EFFECTS: handles close window button
         public void windowClosing(WindowEvent e) {
             quit();
@@ -201,21 +201,11 @@ public class MainGUI extends JFrame {
 
         timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, runningTime);
         pomoTimer.start(timer, timerInterval);
-
-
-//        MOVED to PomodoroTimer
-//        timer = new Timer();
-//        timer.schedule(timerInterval, 0, 1000);
-
-//        timer = new Timer();
-//        timerInterval = new ui.PomodoroTimerDisplay(pomoTimer, runningTime);
-//        timer.schedule(timerInterval, 0, 1000);
     }
 
     // EFFECTS: stops the pomodoro timer
     public void stop() {
         pomoTimer.stop();
-//        timer.cancel();
     }
 
 
