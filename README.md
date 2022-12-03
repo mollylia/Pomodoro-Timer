@@ -53,7 +53,7 @@ Saved Pomodoro Timer
 
 - added an interval called *project*, started the timer, stopped the timer, and chose to save timer when I quit.
 
-## Phase 4: Task 3
+### Phase 4: Task 3
 If I had more time, some refactoring that I would do to improve my design includes:
 - Eliminating redundant associations that increase coupling unnecessarily.
   - get rid of association between AddIntervalFrame, PomodoroInterval, and PomodoroTimer, so there is only one
