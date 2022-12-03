@@ -55,7 +55,7 @@ Saved Pomodoro Timer
 
 ## Phase 4: Task 3
 If I had more time, some refactoring that I would do to improve my design includes:
-- Eliminating redundant associations that increase coupling unnecessarily
+- Eliminating redundant associations that increase coupling unnecessarily.
   - get rid of association between AddIntervalFrame, PomodoroInterval, and PomodoroTimer, so there is only one
   association between AddIntervalFrame and PomodoroTimerApp. PomodoroInterval and PomodoroTimer can be accessed through
   PomodoroTimerApp.
@@ -63,3 +63,9 @@ If I had more time, some refactoring that I would do to improve my design includ
   PomodoroTimerApp. PomodoroTimer can be accessed through PomodoroTimerApp.
   - get rid of association between ViewIntervalFrame and PomodoroTimer, so there is only one association between
   ViewIntervalFrame and PomodoroTimerApp. PomodoroTimer can be accessed through PomodoroTimerApp.
+- Apply the Singleton Pattern to the PomodoroTimerApp class.
+  - create a single, private, static field of the class's type to hold the single instance of the class.
+  - create a private constructor that takes no arguments.
+  - create a public static method that allows access to the single instance.
+  - in the public static method, if the single instance is null, create an instance.
+  - make the public static method return the single instance.
