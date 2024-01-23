@@ -59,6 +59,7 @@ public class MainGUI extends JFrame {
         background.setLayout(null);
         this.addWindowListener(new WindowHandler());
 
+        // TODO: fix timer display
         setSize(width, height);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
