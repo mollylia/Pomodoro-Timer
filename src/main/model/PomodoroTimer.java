@@ -3,8 +3,6 @@ package model;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
-import ui.PomodoroTimerApp;
-
 import java.util.*;
 
 // Represents the list of Pomodoro intervals to run
@@ -30,11 +28,6 @@ public class PomodoroTimer implements Writable {
         indexCount = 0;
     }
 
-    // EFFECTS: returns the name of the Pomodoro timer, getter
-    public String getName() {
-        return name;
-    }
-
     // MODIFIES: this
     // EFFECTS: adds a new pomodoro interval to the collection of intervals to be run
     public void addInterval(PomodoroInterval interval) {
@@ -47,7 +40,7 @@ public class PomodoroTimer implements Writable {
     // MODIFIES: this
     // EFFECTS: returns the next time interval in the list to be run
     public PomodoroInterval getNextInterval() {
-        PomodoroInterval nextInterval = null;
+        PomodoroInterval nextInterval;
         if (indexCount == pomoIntervals.size()) {
             nextInterval = null;
         } else {
@@ -59,11 +52,7 @@ public class PomodoroTimer implements Writable {
 
     // EFFECTS: checks if the collection of intervals to be run is empty
     public Boolean isEmpty() {
-        if (pomoIntervals.size() == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return pomoIntervals.isEmpty();
     }
 
     // EFFECTS: starts the pomodoro timer and logs the event
@@ -83,6 +72,11 @@ public class PomodoroTimer implements Writable {
         EventLog.getInstance().logEvent(new Event("Stopped Pomodoro Timer"));
     }
 
+    // EFFECTS: returns the name of the Pomodoro timer, getter
+    public String getName() {
+        return name;
+    }
+
     // EFFECTS: checks if the timer has been started
     public Boolean hasStarted() {
         return started;
@@ -93,17 +87,11 @@ public class PomodoroTimer implements Writable {
         return pomoIntervals.size();
     }
 
-
-    // Method was based on WorkRoom.getThingies() in:
-    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // EFFECTS: returns an unmodified list of Pomodoro intervals in the Pomodoro timer
     public List<PomodoroInterval> getPomoIntervals() {
         return Collections.unmodifiableList(pomoIntervals);
     }
 
-
-    // Method was based on WorkRoom.toJson() in:
-    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // EFFECTS: changes interval data to JSon
     @Override
     public JSONObject toJson() {
@@ -113,8 +101,6 @@ public class PomodoroTimer implements Writable {
         return json;
     }
 
-    // Method was based on WorkRoom.thingiesToJson() in:
-    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
     // EFFECTS: returns the intervals in the timer as a JSON array
     private JSONArray pomoIntervalsToJson() {
         JSONArray jsonArray = new JSONArray();

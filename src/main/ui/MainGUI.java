@@ -13,17 +13,17 @@ import java.awt.event.WindowEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 // Represents GUI for the Pomodoro timer
 public class MainGUI extends JFrame {
     private String savedFilePath = "./data/pomodorotimer.json";
     private PomodoroTimer pomoTimer;
     private PomodoroTimerApp app;
-
     private Timer timer;
     private TimerTask timerInterval;
     private JLabel runningTime;
-
+    private JLabel background;
+    private int width = 800;
+    private int height = 500;
 
     // EFFECTS: constructs main panel
     public MainGUI() {
@@ -33,29 +33,78 @@ public class MainGUI extends JFrame {
 
     // EFFECTS: initializes main panel
     private void initializePanel() {
-        ImageIcon backgroundImage = new ImageIcon("./data/background.jpg");
-        JLabel background = new JLabel(backgroundImage);
-        add(background);
-
+        setBackground();
         JMenuBar menuBar = createJMenuBar();
         setJMenuBar(menuBar);
 
-        setSize(400, 300);
+        setPomoDisplay();
+        MainPanelKeyHandler startTimerButton = setButton("Start");
+        MainPanelKeyHandler stopTimerButton = setButton("Stop");
+
+        JPanel timerPanel = new JPanel();
+        setPomoPanel(timerPanel);
+
+        JPanel buttonPanel = new JPanel();
+        setButtonPanel(buttonPanel, startTimerButton, stopTimerButton);
+
+        // timer and button displays
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        contentPanel.setBounds(width/4,height/5, width/2, height/2);
+        contentPanel.add(timerPanel);
+        contentPanel.add(buttonPanel);
+        contentPanel.setOpaque(false);
+
+        background.add(contentPanel);
+        background.setLayout(null);
+        this.addWindowListener(new WindowHandler());
+
+        setSize(width, height);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
+    }
 
+    // EFFECTS: sets and sizes background image
+    private void setBackground() {
+        ImageIcon backgroundImage = new ImageIcon("./data/rain.gif");
+        background = new JLabel(backgroundImage) {
+            // draw the background image to fill the entire label
+            protected void paintComponent(Graphics graphics) {
+                graphics.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+        add(background);
+    }
+
+    // EFFECTS: creates and sets the size of a new button
+    private MainPanelKeyHandler setButton(String name) {
+        MainPanelKeyHandler button = new MainPanelKeyHandler(name);
+        button.setPreferredSize(new Dimension(100, 45));
+        button.setFont(new Font("Chalkboard", Font.PLAIN, 18));
+        return button;
+    }
+
+    // EFFECTS: sets the size of the timer display
+    private void setPomoDisplay() {
         runningTime = new JLabel();
+        runningTime.setText("00:00");
+        runningTime.setFont(new Font("Chalkboard", Font.PLAIN, 140));
+        runningTime.setForeground(new Color(0xf5f5f5));
+    }
 
-        MainPanelKeyHandler startTimerButton = new MainPanelKeyHandler("Start");
-        MainPanelKeyHandler stopTimerButton = new MainPanelKeyHandler("Stop");
+    // EFFECTS: adds running time to panel
+    private void setPomoPanel(JPanel panel) {
+        panel.setOpaque(false);
+        panel.add(runningTime);
+    }
 
-        background.add(runningTime, BorderLayout.SOUTH);
-        background.add(startTimerButton);
-        background.add(stopTimerButton);
-        background.setLayout(new FlowLayout());
-
-        this.addWindowListener(new WindowHandler());
+    // EFFECTS: adds buttons to panel
+    private void setButtonPanel(JPanel panel, MainPanelKeyHandler start, MainPanelKeyHandler stop) {
+        panel.add(start);
+        panel.add(Box.createRigidArea(new Dimension(50, 0)));
+        panel.setOpaque(false);
+        panel.add(stop);
     }
 
     // EFFECTS: saves the current Pomodoro timer to file
@@ -107,7 +156,8 @@ public class MainGUI extends JFrame {
     public class WindowHandler extends WindowAdapter {
 
         // EFFECTS: constructs window handler
-        public WindowHandler() {}
+        public WindowHandler() {
+        }
 
         // EFFECTS: handles close window button
         public void windowClosing(WindowEvent e) {
@@ -121,7 +171,6 @@ public class MainGUI extends JFrame {
             System.out.println(event.toString());
         }
     }
-
 
 
     // EFFECTS: adds tabs to menu bars on the main panel, and adds shortcuts
@@ -190,7 +239,6 @@ public class MainGUI extends JFrame {
             }
         }
     }
-
 
 
     // EFFECTS: starts the pomodoro timer
