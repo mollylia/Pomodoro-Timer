@@ -40,7 +40,7 @@ public class PomodoroTimerDisplay extends TimerTask {
         PomodoroInterval nextInterval = pomoTimer.getNextInterval();
         if (nextInterval != null) {
             runTime = nextInterval.getDuration();
-            runTime = nextInterval.getDuration()+1;       // add 1 so timer can hit 0
+            runTime = nextInterval.getDuration() + 1;       // add 1 so timer can hit 0
             isStudy = nextInterval.getStatus();
         }
     }
@@ -53,11 +53,11 @@ public class PomodoroTimerDisplay extends TimerTask {
             long second = (durationInSeconds) % 60;
             long minute = (durationInSeconds / 60) % 60;
 
-            String formatedSec = String.format("%02d", second);
-            String formatedMin = String.format("%02d", minute);
+            String formattedSec = String.format("%02d", second);
+            String formattedMin = String.format("%02d", minute);
 
             timeElapsed += 1;
-            timerDisplay.setText(formatedMin + ":" + formatedSec);
+            timerDisplay.setText(formattedMin + ":" + formattedSec);
 
             if (!(isStudy)) {
                 breakTime(runTime);
@@ -65,8 +65,8 @@ public class PomodoroTimerDisplay extends TimerTask {
                 studyTime(runTime);
             }
         } else {
-            timerDisplay.setText("00:00");
-//            timerDisplay.setText("Session complete!");
+            JOptionPane.showMessageDialog(new JFrame("Notification"), "The session is complete!");
+            cancel();
         }
     }
 
@@ -77,8 +77,9 @@ public class PomodoroTimerDisplay extends TimerTask {
             intervalElapsed += 1;
             getNextInterval();
 
-//            timerDisplay.setText("Break time is over!");
-//            TODO: make a pop-up window for notification
+            if (intervalElapsed < totalIntervalCounter) {
+                JOptionPane.showMessageDialog(new JFrame("Notification"), "Break time is over!");
+            }
         }
     }
 
@@ -89,8 +90,9 @@ public class PomodoroTimerDisplay extends TimerTask {
             intervalElapsed += 1;
             getNextInterval();
 
-//            timerDisplay.setText("Time for a break!");
-//            TODO: make a pop-up window for notification
+            if (intervalElapsed < totalIntervalCounter) {
+                JOptionPane.showMessageDialog(new JFrame("Notification"), "Time for a break!");
+            }
         }
     }
 }
