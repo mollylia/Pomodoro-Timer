@@ -80,8 +80,6 @@ public class PomodoroTimerDisplay extends TimerTask {
 //            timerDisplay.setText("Break time is over!");
 //            TODO: make a pop-up window for notification
         }
-
-
     }
 
     // EFFECTS: checks to see if study interval has ended, if so notify the user
