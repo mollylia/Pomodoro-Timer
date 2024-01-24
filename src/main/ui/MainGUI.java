@@ -47,7 +47,6 @@ public class MainGUI extends JFrame {
         JPanel buttonPanel = new JPanel();
         setButtonPanel(buttonPanel, startTimerButton, stopTimerButton);
 
-        // timer and button displays
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
         contentPanel.setBounds(width/4,height/5, width/2, height/2);
@@ -59,7 +58,6 @@ public class MainGUI extends JFrame {
         background.setLayout(null);
         this.addWindowListener(new WindowHandler());
 
-        // TODO: fix timer display
         setSize(width, height);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

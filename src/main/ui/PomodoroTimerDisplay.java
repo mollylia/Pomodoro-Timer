@@ -87,6 +87,7 @@ public class PomodoroTimerDisplay extends TimerTask {
             timeElapsed = 0;
             intervalElapsed += 1;
             getNextInterval();
+
 //            TODO: make a pop-up window for notification
 //            timerDisplay.setText("Time for a break!");
         }
