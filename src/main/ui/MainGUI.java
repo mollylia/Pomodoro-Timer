@@ -67,12 +67,8 @@ public class MainGUI extends JFrame {
     // EFFECTS: sets and sizes background image
     private void setBackground() {
         ImageIcon backgroundImage = new ImageIcon("./data/rain.gif");
-        background = new JLabel(backgroundImage) {
-            // draw the background image to fill the entire label
-            protected void paintComponent(Graphics graphics) {
-                graphics.drawImage(backgroundImage.getImage(), 0, 0, getWidth(), getHeight(), this);
-            }
-        };
+        background = new JLabel(backgroundImage);
+        setResizable(false);
         add(background);
     }
 
