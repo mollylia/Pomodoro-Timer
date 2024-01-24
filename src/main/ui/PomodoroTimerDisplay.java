@@ -51,10 +51,15 @@ public class PomodoroTimerDisplay extends TimerTask {
         if ((timeElapsed < runTime) && (intervalElapsed < totalIntervalCounter)) {
             long durationInSeconds = runTime - timeElapsed;
             long second = (durationInSeconds) % 60;
-            long minute = (durationInSeconds / (60)) % 60;
+            long minute = (durationInSeconds / 60) % 60;
+
+            String formatedSec = String.format("%02d", second);
+            String formatedMin = String.format("%02d", minute);
+
             timeElapsed += 1;
             //System.out.println(minute + ":" + second);
-            timerDisplay.setText(minute + ":" + second);
+            // timerDisplay.setText(minute + ":" + second);
+            timerDisplay.setText(formatedMin + ":" + formatedSec);
 
             if (!(isStudy)) {
                 breakTime(runTime);

@@ -1,8 +1,8 @@
 {
     "name": "My Pomodoro Timer",
     "pomoIntervals": [{
-        "duration": 1500,
+        "duration": 300,
         "name": "",
-        "status": true
+        "status": false
     }]
 }
