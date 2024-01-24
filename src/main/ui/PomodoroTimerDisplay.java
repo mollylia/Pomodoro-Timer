@@ -57,8 +57,6 @@ public class PomodoroTimerDisplay extends TimerTask {
             String formatedMin = String.format("%02d", minute);
 
             timeElapsed += 1;
-            //System.out.println(minute + ":" + second);
-            // timerDisplay.setText(minute + ":" + second);
             timerDisplay.setText(formatedMin + ":" + formatedSec);
 
             if (!(isStudy)) {
@@ -66,11 +64,8 @@ public class PomodoroTimerDisplay extends TimerTask {
             } else {
                 studyTime(runTime);
             }
-
         } else {
-//            System.out.println("Session complete!");
             timerDisplay.setText("Session complete!");
-            //System.exit(0);
         }
     }
 
@@ -80,8 +75,9 @@ public class PomodoroTimerDisplay extends TimerTask {
             timeElapsed = 0;
             intervalElapsed += 1;
             getNextInterval();
-//            System.out.println("Break time is over!");
-            timerDisplay.setText("Break time is over!");
+
+//            TODO: make a pop-up window for notification
+//            timerDisplay.setText("Break time is over!");
         }
     }
 
@@ -91,8 +87,8 @@ public class PomodoroTimerDisplay extends TimerTask {
             timeElapsed = 0;
             intervalElapsed += 1;
             getNextInterval();
-//            System.out.println("Time for a break!");
-            timerDisplay.setText("Time for a break!");
+//            TODO: make a pop-up window for notification
+//            timerDisplay.setText("Time for a break!");
         }
     }
 }

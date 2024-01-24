@@ -1,4 +1,4 @@
-# Pomodoro Timer
+## Pomodoro Timer
 
 The application will allow users to **schedule focused work sessions with short breaks** to help with concentration and
 productivity. Users set time intervals, and a timer displays the current interval on the screen with an option to
