@@ -57,19 +57,22 @@ public class PomodoroTimer implements Writable {
 
     // EFFECTS: starts the pomodoro timer and logs the event
     public void start(Timer timer, TimerTask timerInterval) {
-        started = true;
-        this.timer = timer;
-        this.timer = new Timer();
-        this.timer.schedule(timerInterval, 0, 1000);
-        EventLog.getInstance().logEvent(new Event("Started Pomodoro Timer"));
+        if (!started) {
+            started = true;
+            this.timer = new Timer();
+            this.timer.schedule(timerInterval, 0, 1000);
+            EventLog.getInstance().logEvent(new Event("Started Pomodoro Timer"));
+        }
     }
 
     // MODIFIES: timer
     // EFFECTS: stops the pomodoro timer and logs the event
     public void stop() {
-        started = false;
-        timer.cancel();
-        EventLog.getInstance().logEvent(new Event("Stopped Pomodoro Timer"));
+        if (started) {
+            started = false;
+            timer.cancel();
+            EventLog.getInstance().logEvent(new Event("Stopped Pomodoro Timer"));
+        }
     }
 
     // EFFECTS: returns the name of the Pomodoro timer, getter
