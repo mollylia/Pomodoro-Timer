@@ -23,7 +23,6 @@ public class AddIntervalFrame extends JFrame {
     public AddIntervalFrame(PomodoroTimerApp app, PomodoroTimer timer) {
         this.app = app;
         pomoTimer = timer;
-
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new FlowLayout());
 
@@ -33,12 +32,11 @@ public class AddIntervalFrame extends JFrame {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setVisible(true);
 
-        JLabel labelName = new JLabel("Name");
-        textName = new JTextField("", 20);
+        JLabel labelName = new JLabel("Task name");
+        textName = new JTextField("", 18);
 
-
+        // TODO: add placeholder in dropdown menu
         String[] intervalStatus = {"short study", "long study", "short break", "long break"};
-
         statusSelection = new JComboBox(intervalStatus);
         statusSelection.setBounds(50, 50, 90, 20);
 

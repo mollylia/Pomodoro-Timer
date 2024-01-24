@@ -49,7 +49,8 @@ public class MainGUI extends JFrame {
 
         JPanel contentPanel = new JPanel();
         contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
-        contentPanel.setBounds(width/4,height/5, width/2, height/2);
+//        contentPanel.setBounds(width/4,height/5, width/2, height/2);
+        contentPanel.setBounds(0,height/5, width, height/2);
         contentPanel.add(timerPanel);
         contentPanel.add(buttonPanel);
         contentPanel.setOpaque(false);
@@ -151,8 +152,7 @@ public class MainGUI extends JFrame {
     public class WindowHandler extends WindowAdapter {
 
         // EFFECTS: constructs window handler
-        public WindowHandler() {
-        }
+        public WindowHandler() { }
 
         // EFFECTS: handles close window button
         public void windowClosing(WindowEvent e) {

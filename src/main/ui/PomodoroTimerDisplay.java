@@ -38,9 +38,9 @@ public class PomodoroTimerDisplay extends TimerTask {
     // EFFECTS: gets the time and status of the next interval
     public void getNextInterval() {
         PomodoroInterval nextInterval = pomoTimer.getNextInterval();
-
         if (nextInterval != null) {
             runTime = nextInterval.getDuration();
+            runTime = nextInterval.getDuration()+1;       // add 1 so timer can hit 0
             isStudy = nextInterval.getStatus();
         }
     }
@@ -49,7 +49,7 @@ public class PomodoroTimerDisplay extends TimerTask {
     @Override
     public void run() {
         if ((timeElapsed < runTime) && (intervalElapsed < totalIntervalCounter)) {
-            long durationInSeconds = runTime - timeElapsed;
+            long durationInSeconds = runTime - timeElapsed - 1;
             long second = (durationInSeconds) % 60;
             long minute = (durationInSeconds / 60) % 60;
 
@@ -65,7 +65,8 @@ public class PomodoroTimerDisplay extends TimerTask {
                 studyTime(runTime);
             }
         } else {
-            timerDisplay.setText("Session complete!");
+            timerDisplay.setText("00:00");
+//            timerDisplay.setText("Session complete!");
         }
     }
 
@@ -76,9 +77,11 @@ public class PomodoroTimerDisplay extends TimerTask {
             intervalElapsed += 1;
             getNextInterval();
 
-//            TODO: make a pop-up window for notification
 //            timerDisplay.setText("Break time is over!");
+//            TODO: make a pop-up window for notification
         }
+
+
     }
 
     // EFFECTS: checks to see if study interval has ended, if so notify the user
@@ -88,8 +91,8 @@ public class PomodoroTimerDisplay extends TimerTask {
             intervalElapsed += 1;
             getNextInterval();
 
-//            TODO: make a pop-up window for notification
 //            timerDisplay.setText("Time for a break!");
+//            TODO: make a pop-up window for notification
         }
     }
 }
