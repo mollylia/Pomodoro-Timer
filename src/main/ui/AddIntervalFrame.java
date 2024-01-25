@@ -35,7 +35,6 @@ public class AddIntervalFrame extends JFrame {
         JLabel labelName = new JLabel("Task name");
         textName = new JTextField("", 18);
 
-        // TODO: add placeholder in dropdown menu
         String[] intervalStatus = {"short study", "long study", "short break", "long break"};
         statusSelection = new JComboBox(intervalStatus);
         statusSelection.setBounds(50, 50, 90, 20);
@@ -67,29 +66,34 @@ public class AddIntervalFrame extends JFrame {
         // EFFECTS: button listener for panel, loads saved Pomodoro timer before adding new timer interval
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equals("Add")) {
-                String statusType = statusSelection.getSelectedItem().toString();
-
-                if ((statusType == "short break" || statusType == "long break")) {
-                    intervalStatus = false;
+                if (textName.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(new JFrame("Notification"), "Please give this interval a short name description");
                 } else {
-                    intervalStatus = true;
-                }
+                    String statusType = statusSelection.getSelectedItem().toString();
+                    JOptionPane.showMessageDialog(new JFrame("Notification"), "Added: " + textName.getText() + "!");
 
-                if (statusType == "short study") {
-                    duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.SHORT_STUDY);
-                } else if (statusType == "long study") {
-                    duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.LONG_STUDY);
-                } else if (statusType == "short break") {
-                    duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.SHORT_BREAK);
-                } else if (statusType == "long break") {
-                    duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.LONG_BREAK);
+                    if ((statusType == "short break" || statusType == "long break")) {
+                        intervalStatus = false;
+                    } else {
+                        intervalStatus = true;
+                    }
+
+                    if (statusType == "short study") {
+                        duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.SHORT_STUDY);
+                    } else if (statusType == "long study") {
+                        duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.LONG_STUDY);
+                    } else if (statusType == "short break") {
+                        duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.SHORT_BREAK);
+                    } else if (statusType == "long break") {
+                        duration = PomodoroDefault.getPomodoroDefault(PomodoroDefault.LONG_BREAK);
+                    }
+
+                    pomoTimer = app.loadPomodoroTimer();
+                    interval = new PomodoroInterval(intervalStatus, textName.getText(), duration);
+                    pomoTimer.addInterval(interval);
+                    app.savePomodoroTimer();
                 }
             }
-
-            pomoTimer = app.loadPomodoroTimer();
-            interval = new PomodoroInterval(intervalStatus, textName.getText(), duration);
-            pomoTimer.addInterval(interval);
-            app.savePomodoroTimer();
         }
     }
 }
